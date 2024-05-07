@@ -18,13 +18,13 @@ body {
 }
 
 .error-msg {
-  color: #D8000C;
-  background-color: #FFBABA;
+  color: #d8000c;
+  background-color: #ffbaba;
 }
 
 .warning-msg {
-  color: #9F6000;
-  background-color: #FEEFB3;
+  color: #9f6000;
+  background-color: #feefb3;
 }
 
 .navigation {
@@ -75,8 +75,6 @@ body {
 }
 
 .meuForm {
-
-
   display: flex;
   width: 110%;
   justify-content: space-around;
@@ -137,7 +135,7 @@ body {
   object-fit: cover;
   border-bottom-left-radius: 10px;
   border-top-left-radius: 10px;
-  transition: .3s ease-in-out;
+  transition: 0.3s ease-in-out;
 }
 
 .alongar {
@@ -205,26 +203,25 @@ body {
 
   z-index: 5000;
 }
-
 .helpContainer img {
-  width: 46px;
+  width: 26px;
   margin-right: 0.5rem;
 }
 
 .helpContainer a {
   text-decoration: none;
   color: #ffffff;
+  font-size: 0.8em;
   font-weight: 500;
   transition: 0.2s ease-in-out;
 }
 
 .helpContainer a:hover {
-  color: #dc3545;
+  color: #ffffff99;
   font-weight: 500;
 }
 
 @media only screen and (max-width: 767px) {
-
   body {
     background-image: url(../../img/bg-image-login-signin.png);
   }
@@ -243,7 +240,7 @@ body {
 
   .activeLink {
     font-weight: 500;
-    font-size: .8rem;
+    font-size: 0.8rem;
   }
 
   #loginPopup {
@@ -272,11 +269,9 @@ body {
   .formContainer {
     width: 90%;
   }
-
 }
 
 @media screen and (max-width: 600px) {
-
   body {
     background-image: url(../../img/bg-image-login-signin.png);
   }
@@ -303,6 +298,6 @@ body {
   }
 
   .form-label {
-    font-size: .8rem;
+    font-size: 0.8rem;
   }
 }

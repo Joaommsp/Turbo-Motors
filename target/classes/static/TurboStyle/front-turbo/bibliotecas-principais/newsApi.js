@@ -42,12 +42,20 @@ function showNewsOnPage(newsArray) {
   const newsCardsContainer = document.querySelector(".newsCardsContainer");
 
   for (let i = 0; i < newsArray.length; i++) {
+    if (newsArray[i].title == "[Removed]") {
+      continue;
+    }
+
     newsCardsContainer.innerHTML += `<div id="newsCard" >
     <img id="newsImage" src="${newsArray[i].urlToImage}" />
     <span id="lastNewsCheck" > <img src="/TurboStyle/img/svg/check-icon.svg" />Últimas notícias</span>
-    <span id="newsTitle" >${newsArray[i].title}</span>
+    <span id="newsTitle" >${
+      newsArray[i].title != null ? newsArray[i].title : ""
+    }</span>
     <p id="newsDescription">${newsArray[i].description} ... </p>
-    <a id="newsUrl" href="${newsArray[i].url}">Acesse aqui <img src="/TurboStyle/img/svg/external-link-icon.svg" /> </a>
+    <a id="newsUrl" href="${
+      newsArray[i].url
+    }">Acesse aqui <img src="/TurboStyle/img/svg/external-link-icon.svg" /> </a>
     </div>`;
   }
 }
