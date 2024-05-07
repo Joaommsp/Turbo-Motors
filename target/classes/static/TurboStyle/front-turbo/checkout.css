@@ -207,7 +207,7 @@ p{
     height: 30px;
     border-radius: 50%;
     background-color: #fff;
-    border: 2px solid #007bff;
+    border: 2px solid #0F1417;
     line-height: 30px;
     font-weight: bold;
     display: flex;
@@ -219,7 +219,7 @@ p{
 
   .meusCarros {
     width: 30%;
-    background: #2B4792;
+    background: #0F1417;
 
     padding: 30px;
     border-radius: 2rem;
@@ -235,10 +235,10 @@ p{
     font-weight: 600;
 }
 .meuBotao {
-    background: #133285;
+    background: #0F1417;
     width: 300px;
     padding: 10px;
-    border: 1px solid #2B4792;
+    border: 1px solid #0F1417;
     border-radius: 0;
     color: white;
     font-weight: 400;
@@ -247,9 +247,9 @@ p{
 .meuBotaoVoltar {
     width: 200px;
     padding: 10px;
-    border: 1px solid #133285;
+    border: 1px solid #0F1417;
     background: transparent;
-    color: #133285;
+    color: #0F1417;
 }
   
   .step-line {
@@ -258,7 +258,7 @@ p{
     left: 50px;
     width: calc(100% - 100px);
     height: 2px;
-    background-color: #007bff;
+    background-color: #0F1417;
     z-index: -1;
   }
   
