@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TurboMotors Admin</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <!-- <link rel="stylesheet" href="/TurboStyle/css/painel.css"> -->
+  <link rel="stylesheet" href="/TurboStyle/css/CadastroCarro.css">
+  <link rel="stylesheet" href="/TurboStyle/css/painel.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+    <!-- Inclua o jQuery (necessário para o DataTables) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <!-- Inclua o DataTables CSS (para estilos da tabela) -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+
+    <!-- Inclua o DataTables JavaScript (para funcionalidade da tabela) -->
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.6/css/jquery.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.2.6/css/buttons.dataTables.min.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.6/js/jquery.dataTables.min.js"></script>
+
+
+ <!-- INTRO JS -->
+ <script src="/TurboStyle/biblioteca/intro/intro.min.js"></script>
+ <link href="/TurboStyle/biblioteca/intro/introjs.min.css" rel="stylesheet">
+ 
+
+</head>
+<body>
+  <div class="cabecalho">
+    <div class="padrao">
+      <div class="titulo-hamb">
+        <a class="navbar-brand" href="#">
+          <strong class="mouseClick me-auto" style="color: white;">Turbo Motors</strong>
+        </a>
+        <div class="menu-toggle" onclick="toggleSidebar()">
+          <i class="bi bi-list"></i>
+        </div>
+      </div>
+
+          <div class="dropdown btn-group">
+            
+      <button  id="removerHover" onclick="MostrarAviso()"  type="button" style="color: white" class="btn position-relative btnMensagem">
+        <i class="bi bi-bell-fill"></i>
+        <span id="avisoMensagem" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+          1
+          <span class="visually-hidden">unread messages</span>
+        </span>
+      </button>
+
+            <button  id="menuDrop" class="btn" type="button" data-bs-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false">
+              <p id="meuUser" class="dropdown-toggle-text meuUserIntro">...</p>
+            </button>
+            <div class="dropdown-menu dropdown-menu-animated">
+              <a class="dropdown-item" href="funcionario"><i class="bi bi-person-fill"></i> Minha Conta</a>
+              <a class="dropdown-item" href="CadastrarUsuario"><i class="bi bi-person-fill-gear"></i> Usuários</a>
+              <a class="dropdown-item" href="logout"><i class="bi bi-box-arrow-right"></i> Sair</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      
+
+
+      <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="10000">
+          <div class="toast-header">
+            <strong class="me-auto">Turbo Motors</strong>
+            <small>Agora</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+          </div>
+          <div class="toast-body">
+            <p id="mostrarUsuarioLogado">Olá</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <main class="principal">
+    <sidebar class="barraLateral">
+      <div class="perfil">
+        <img id="fotoUsuario" class="perfil-img" src="https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile-thumbnail.png">
+        <p id="usuarioLogado">...</p>
+        <p id="cargoUsuario">Software Developer</p>
+      </div>
+      <nav class="meuCSS sidebar card py-2 mb-4 meuMenu">
+        <ul class="nav flex-column" id="nav_accordion">
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/painel"><i class="bi bi-file-bar-graph"></i> Dashboard</a>
+          </li>
+          <li class="nav-item has-submenu">
+            <a class="nav-link" href="#"><i class="bi bi-car-front-fill"></i> Cadastros <i class="bi bi-chevron-down"></i> </a>
+            <ul class="submenu collapse">
+              <li><a class="nav-link" href="/admin/carro.html"><i class="bi bi-car-front-fill"></i> Cadastrar Carros</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item has-submenu">
+            <a class="nav-link" href="#"><i class="bi bi-car-front-fill"></i> Listagens <i class="bi bi-chevron-down"></i> </a>
+            <ul class="submenu collapse">
+              <li><a class="nav-link" href="/admin/listarFinanceiro"><i class="bi bi-car-front-fill"></i> Listar Financeiro</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/relatorios"><i class="bi bi-filetype-pdf"></i> Relatórios</a>
+          </li>
+        </ul>
+        </nav>
+    </sidebar>
+    <section class="conteudo-principal" style="height: 100vh;">
+      <div class="container-fluid" >
+                        
+                <div class="container mt-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h2>Relatórios de Vendas</h2>
+                            <div class="mb-3">
+                                <label for="statusSelect" class="form-label">Status:</label>
+                                <select id="filtroVendas" class="form-select" name="siglaFiltro">
+                                    <option value="F">Finalizado</option>
+                                    <option value="C">Cancelado</option>
+                                    <option value="A">Em Aberto</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <button type="submit" onclick="gerarRelatorio('RelatorioVendas')" class="btn btn btn-primary">Gerar Relatórios</button>
+                            </div>
+                     </div>
+                        <div class="col-md-6">
+                            <h2>Relatórios de Alugueis</h2>
+                            <div class="mb-3">
+                                <label for="anoSelect" class="form-label">Filtrar pelo Status do Aluguel:</label>
+                                <select id="filtroAluguel" class="form-select" name="siglaFiltro">
+                                    <option value="F">Finalizado</option>
+                                    <option value="C">Cancelado</option>
+                                    <option value="A">Em Aberto</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <button onclick="gerarRelatorio('Aluguel')" class="btn btn btn-primary">Filtrar por Ano</button>
+                            </div>
+                        </div>
+                    </div>                 
+                </div>
+      </div>
+    </section>
+    
+      <div class="container" id="dropDowMenu">
+    <div id="menuIcons">
+      <img src="/TurboStyle/img/svg/profile-icon.svg" alt="">
+      <img src="/TurboStyle/img/svg/users.svg" alt="">
+      <img src="/TurboStyle/img/svg/logout-icon.svg" alt="">
+    </div>
+    <div id="menuLinks">
+      <a href="funcionario">Meu Perfil</a>
+      <a href="CadastrarUsuario">Usuários</a>
+      <a href="logout">Sair</a>
+    </div>
+    <img src="/TurboStyle/img/svg/close-icon.svg" id="closeDropDow" alt="">
+  </div>
+  </main>  
+  <!-- <script src="/TurboStyle/index.js" defer></script> -->
+  <script src="/TurboStyle/index.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+new DataTable('#minha-tabela', {
+    language: {
+        info: 'Mostrando a página _PAGE_ de _PAGES_ - Turbo Motors Software',
+        infoEmpty: 'Não há registros disponíveis',
+        infoFiltered: '(filtrado do total de _MAX_ registros)',
+        lengthMenu: 'Mostrar _MENU_ registros por página',
+        zeroRecords: 'Nada encontrado - desculpe turboMotors Developer'
+    }
+});
+  </script>
+
+<script>
+	async function gerarRelatorio(nomeRelatorio) {
+    const loading = Swal.fire({
+        title: 'Aguarde <i class="bi bi-filetype-pdf"></i>',
+        html: 'Gerando Relatório ...',
+        allowOutsideClick: false,
+        showConfirmButton: false,
+        willOpen: () => {
+            Swal.showLoading();
+        }
+    });
+
+    // Aguarda dois segundos
+    await new Promise(resolve => setTimeout(resolve, 2000));
+
+    let siglaFiltro = null;
+    if (nomeRelatorio == 'RelatorioVendas') {
+        siglaFiltro = document.getElementById('filtroVendas').value;
+    } else {
+        siglaFiltro = document.getElementById('filtroAluguel').value;
+    }
+
+    const url = `/admin/gerarRelatorio?siglaFiltro=${siglaFiltro}&nomeRelatorio=${nomeRelatorio}`;
+
+    try {
+        const response = await axios.get(url, { responseType: 'arraybuffer' });
+
+        if (response.status === 200) {
+            loading.close();
+            Swal.fire({
+                icon: 'success',
+                title: 'Relatório gerado com sucesso!',
+                showConfirmButton: false,
+                timer: 1500
+            });
+            const blob = new Blob([response.data], { type: 'application/pdf' });
+            const pdfUrl = URL.createObjectURL(blob);
+            window.open(pdfUrl);
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Erro ao gerar relatório',
+                text: 'Por favor, tente novamente mais tarde.'
+            });
+        }
+    } catch (error) {
+        console.log(error);
+        Swal.fire({
+            icon: 'error',
+            title: 'Erro ao gerar relatório',
+            text: 'Por favor, tente novamente mais tarde.'
+        });
+    }
+}
+
+// Chamando a função depois de dois segundos
+gerarRelatorioDepoisDeDoisSegundos('RelatorioVendas');
+
+	
+</script>
+
+
+<script>
+  introJs().setOptions({
+steps: [
+{
+  title: "<strong> Relatórios Financeiros </strong>",
+  element: document.querySelector('.mt-4'),
+  intro: 'Este menu oferece acesso aos relatórios financeiros de vendas e aluguéis, fornecendo uma ferramenta essencial para o controle e gerenciamento eficaz das suas finanças.'
+},
+{
+  title: '<strong> Filtrar Relatórios </strong>!',
+  element: document.querySelector('.form-select'),
+  intro: 'Este menu oferece relatórios financeiros de vendas e aluguéis para controle financeiro. Você pode filtrar por status: cancelados, finalizados e em andamento, fornecendo três opções de filtro.'
+},
+{
+  title: '<strong> Menu </strong>!',
+  element: document.querySelector('.btn-primary'),
+  intro: 'Imprimir relatórios em nova aba.'
+}
+]
+}).start();
+</script>
+
+
+</body>
+</html>

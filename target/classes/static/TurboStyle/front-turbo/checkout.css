@@ -1,0 +1,272 @@
+.shop{
+    font-size: 10px;
+}
+
+.space{
+    letter-spacing: 0.8px !important;
+}
+
+.second a:hover {
+    color: rgb(92, 92, 92) ;
+}
+
+.active-2 {
+    color: rgb(92, 92, 92) 
+}
+
+
+.breadcrumb>li+li:before {
+    content: "" !important
+}
+
+.breadcrumb {
+    padding: 0px;
+    font-size: 10px;
+    color: #aaa !important;
+}
+
+.first {
+    background-color: white ;
+}
+
+a {
+    text-decoration: none !important;
+    color: #aaa ;
+}
+
+.btn-lg,.form-control-sm:focus,
+.form-control-sm:active,
+a:focus,a:active {
+    outline: none !important;
+    box-shadow: none !important
+}
+
+.form-control-sm:focus{
+    border:1.5px solid #4bb8a9 ; 
+}
+
+.btn-group-lg>.btn, .btn-lg {
+    padding: .5rem 0.1rem;
+    font-size: 1rem;
+    border-radius: 0;
+    color: white !important;
+    background-color: #4bb8a9;
+    height: 2.8rem !important;
+    border-radius: 0.2rem !important;
+}
+
+.btn-group-lg>.btn:hover, .btn-lg:hover {
+    background-color: #26A69A;
+}
+
+.btn-outline-primary{
+    background-color: #fff !important;
+    color:#4bb8a9 !important;
+    border-radius: 0.2rem !important;   
+    border:1px solid #4bb8a9;
+}
+
+.btn-outline-primary:hover{
+    background-color:#4bb8a9  !important;
+    color:#fff !important;
+    border:1px solid #4bb8a9;
+}
+
+.card-2{
+    margin-top: 40px !important;
+}
+
+.card-header{
+    background-color: #fff;
+    border-bottom:0px solid #aaaa !important;
+}
+
+p{
+    font-size: 13px ;
+}
+        
+.small{
+    font-size: 9px !important;
+}
+
+.form-control-sm {
+    height: calc(2.2em + .5rem + 2px);
+    font-size: .875rem;
+    line-height: 1.5;
+    border-radius: 0;   
+}
+
+.cursor-pointer{
+    cursor: pointer;
+}
+
+.boxed {
+    padding: 0px 8px 0 8px ;
+    background-color: #4bb8a9;
+    color: white;
+}
+
+.boxed-1{
+    padding: 0px 8px 0 8px ;
+    color: black !important;
+    border: 1px solid #aaaa;
+}
+
+.bell{
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+.principalCompras {
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.navigation {
+    width: 100%;
+    background-color: #f5f7f8;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    justify-content: center;
+    padding: 1rem 3rem;
+  
+  }
+  
+.dadoscarros {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    align-items: center;
+}
+  
+.logo {
+    width: 124px;
+  }
+  
+  .headerlinks {
+    display: flex;
+    gap: 24px;
+  }
+  
+  .disableLink {
+    color: #808080;
+    text-decoration: none;
+  }
+  
+  .disableLink:hover {
+    cursor: default;
+  }
+  
+  .activeLink {
+    width: 100%;
+    text-decoration: none;
+    color: #0e1316;
+    font-weight: 500;
+  }
+
+.dados {
+    display: flex;
+}
+
+.dadosEndereco {
+    padding-right: 3rem;
+}
+
+.comprasCarro {
+    display: flex;
+    width: 100%;
+    border-radius: 31px;
+    background: #ffffff;
+    box-shadow:  18px 18px 36px #f2f2f2,
+                 -18px -18px 36px #ffffff;
+    padding: 3rem;
+    height: 573px;
+    margin-top: 2.5%;
+    
+}
+
+/*********** BOOTSTRAP 5 ECOOMERCE CHECKOUT DOCUMENTO GOOGLE ************/
+#container {
+    width: 70%;  
+  }
+  
+  .step-container {
+    position: relative;
+    text-align: center;
+    transform: translateY(-43%);
+  }
+  
+  .step-circle {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #fff;
+    border: 2px solid #007bff;
+    line-height: 30px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+    cursor: pointer; /* Added cursor pointer */
+  }
+
+  .meusCarros {
+    width: 30%;
+    background: #2B4792;
+
+    padding: 30px;
+    border-radius: 2rem;
+  }
+
+.row {
+    width: 200% !important;
+}
+
+.texto {
+    color: #e4e4e6;
+    font-size: 14px !important;
+    font-weight: 600;
+}
+.meuBotao {
+    background: #133285;
+    width: 300px;
+    padding: 10px;
+    border: 1px solid #2B4792;
+    border-radius: 0;
+    color: white;
+    font-weight: 400;
+}
+
+.meuBotaoVoltar {
+    width: 200px;
+    padding: 10px;
+    border: 1px solid #133285;
+    background: transparent;
+    color: #133285;
+}
+  
+  .step-line {
+    position: absolute;
+    top: 16px;
+    left: 50px;
+    width: calc(100% - 100px);
+    height: 2px;
+    background-color: #007bff;
+    z-index: -1;
+  }
+  
+  #multi-step-form{
+    overflow-x: hidden;
+  }
+@media (max-width: 767px) {
+    .breadcrumb-item+.breadcrumb-item {
+        padding-left: 0
+    }
+}

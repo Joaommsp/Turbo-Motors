@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TurboMotors Admin</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="/TurboStyle/css/CadastroCarro.css">
+  <link rel="stylesheet" href="/TurboStyle/css/painel.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+      <!-- Inclua o DataTables CSS (para estilos da tabela) -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/3.0.1/css/buttons.bootstrap5.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.0.2/css/dataTables.bootstrap5.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/3.0.1/css/buttons.bootstrap5.css">
+  
+
+  <!-------- NOVA TABELA 17-03 -------------->
+  <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.datatables.net/2.0.2/js/dataTables.js"></script>
+<script src="https://cdn.datatables.net/2.0.2/js/dataTables.bootstrap5.js"></script>
+<script src="https://cdn.datatables.net/buttons/3.0.1/js/dataTables.buttons.js"></script>
+<script src="https://cdn.datatables.net/buttons/3.0.1/js/buttons.bootstrap5.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/3.0.1/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/3.0.1/js/buttons.print.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/3.0.1/js/buttons.colVis.min.js"></script>
+
+  <!-- INTRO JS -->
+  <script src="/TurboStyle/biblioteca/intro/intro.min.js"></script>
+<link href="/TurboStyle/biblioteca/intro/introjs.min.css" rel="stylesheet">
+
+
+
+</head>
+<body onload="chamarAjuda()">
+  <div class="cabecalho">
+    <div class="padrao">
+      <div class="titulo-hamb">
+        <a class="navbar-brand" href="#">
+          <strong class="mouseClick me-auto" style="color: white;">Turbo Motors</strong>
+        </a>
+        <div class="menu-toggle" onclick="toggleSidebar()">
+          <i class="bi bi-list"></i>
+        </div>
+      </div>
+
+          <div class="dropdown btn-group">
+            
+      <button  id="removerHover" onclick="MostrarAviso()"  type="button" style="color: white" class="btn position-relative btnMensagem">
+        <i class="bi bi-bell-fill"></i>
+        <span id="avisoMensagem" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+          1
+          <span class="visually-hidden">unread messages</span>
+        </span>
+      </button>
+
+            <button  id="menuDrop" class="btn" type="button" data-bs-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false">
+              <p id="meuUser" class="dropdown-toggle-text meuUserIntro">...</p>
+            </button>
+            <div class="dropdown-menu dropdown-menu-animated">
+              <a class="dropdown-item" href="funcionario"><i class="bi bi-person-fill"></i> Minha Conta</a>
+              <a class="dropdown-item" href="CadastrarUsuario"><i class="bi bi-person-fill-gear"></i> Usuários</a>
+              <a class="dropdown-item" href="logout"><i class="bi bi-box-arrow-right"></i> Sair</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      
+
+
+      <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="10000">
+          <div class="toast-header">
+            <strong class="me-auto">Turbo Motors</strong>
+            <small>Agora</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+          </div>
+          <div class="toast-body">
+            <p id="mostrarUsuarioLogado">Olá</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <main class="principal">
+    <sidebar class="barraLateral">
+      <div class="perfil">
+        <img id="fotoUsuario" class="perfil-img" src="https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile-thumbnail.png">
+        <p id="usuarioLogado">...</p>
+        <p id="cargoUsuario">Software Developer</p>
+      </div>
+      <nav class="meuCSS sidebar card py-2 mb-4 meuMenu">
+        <ul class="nav flex-column" id="nav_accordion">
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/painel"><i class="bi bi-file-bar-graph"></i> Dashboard</a>
+          </li>
+          <li class="nav-item has-submenu">
+            <a class="nav-link" href="#"><i class="bi bi-car-front-fill"></i> Cadastros <i class="bi bi-chevron-down"></i> </a>
+            <ul class="submenu collapse">
+              <li><a class="nav-link" href="/admin/carro.html"><i class="bi bi-car-front-fill"></i> Cadastrar Carros</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item has-submenu">
+            <a class="nav-link" href="#"><i class="bi bi-car-front-fill"></i> Listagens <i class="bi bi-chevron-down"></i> </a>
+            <ul class="submenu collapse">
+              <li><a class="nav-link" href="/admin/listarFinanceiro"><i class="bi bi-car-front-fill"></i> Listar Financeiro</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/relatorios"><i class="bi bi-filetype-pdf"></i> Relatórios</a>
+          </li>
+        </ul>
+        </nav>
+    </sidebar>
+    <!-- Daqui par baixo é o conteúdo de cada página -->
+    <section class="conteudo-principal">
+      <div class="container-fluid">
+     	<div class="Tabelas">
+			
+			<div class="Compras">
+				<h2>Compras Finalizadas</h2>
+				<table id="minha-tabela" class="table table-striped" style="width:100%">
+                    <thead>
+                        <tr>
+							<th>Comprador(a)</th>
+                            <th>E-mail</th>
+                            <th>CPF/CNPJ</th>
+                            <th>Carro</th>
+                            <th>Valor</th>
+                            <th>Data Compra</th>
+                            <th>Relatório</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="compraFinalizadas : ${compraFinalizadas}">
+						  <td th:text="${compraFinalizadas[0]}">Carregando Dados...</td>
+                          <td th:text="${compraFinalizadas[1]}">Carregando Dados...</td>
+                          <td th:text="${compraFinalizadas[2]}">Carregando Dados...</td>
+                          <td th:text="${compraFinalizadas[3]}">Carregando Dados...</td>
+							<td th:text="${compraFinalizadas[4]}">Carregando Dados...</td>
+							<td th:text="${compraFinalizadas[5]}">Carregando Dados...</td>
+							<td>
+								<a href="relatorios"><i class="bi bi-filetype-pdf pdfTabela"></i></a>
+							</td>
+                        </tr>
+                      
+                    </tbody>
+                </table>
+			</div> 
+			
+			
+     	<div class="aluguel">
+			 				<h2>Alugueis Finalizados</h2>
+     		<table id="minha-aluguel" class="table table-striped" style="width:100%">
+                    <thead>
+                        <tr>
+						   		<th>Nome do Cliente</th>
+						        <th>CPF/CNPJ</th>
+						        <th>Data de Início</th>
+						        <th>Data de Fim</th>
+						        <th>Quantidade de Dias</th>
+						        <th>Valor Total</th>
+						        <th>Relatório Geral</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                           <tr th:each="alugados : ${alugados}">
+					        <td th:text="${alugados[0]}">Carregando...</td>
+					        <td th:text="${alugados[1]}">Carregando...</td>
+					        <td th:text="${alugados[2]}">Carregando</td>
+					        <td th:text="${alugados[3]}">Carregando</td>
+					        <td th:text="${alugados[4]}">Carregando</td>
+					        <td th:text="${alugados[5]}">Carregando</td>
+							<td>
+								<a href="relatorios"><i class="bi bi-filetype-pdf"></i></a>
+							</td>
+                        </tr>
+                      
+                    </tbody>
+                </table>
+     	
+     	</div>
+			
+     	</div>
+			 
+			 
+			 
+		 </div>
+     	
+     	
+      </div>
+  
+  <div class="container" id="dropDowMenu">
+    <div id="menuIcons">
+      <img src="/TurboStyle/img/svg/profile-icon.svg" alt="">
+      <img src="/TurboStyle/img/svg/users.svg" alt="">
+      <img src="/TurboStyle/img/svg/logout-icon.svg" alt="">
+    </div>
+    <div id="menuLinks">
+      <a href="funcionario">Meu Perfil</a>
+      <a href="CadastrarUsuario">Usuários</a>
+      <a href="logout">Sair</a>
+    </div>
+    <img src="/TurboStyle/img/svg/close-icon.svg" id="closeDropDow" alt="">
+  </div>
+  
+  
+    <div class="container" id="dropDowMenu">
+    <div id="menuIcons">
+      <img src="/TurboStyle/img/svg/profile-icon.svg" alt="">
+      <img src="/TurboStyle/img/svg/users.svg" alt="">
+      <img src="/TurboStyle/img/svg/logout-icon.svg" alt="">
+    </div>
+    <div id="menuLinks">
+      <a href="funcionario">Meu Perfil</a>
+      <a href="CadastrarUsuario">Usuários</a>
+      <a href="logout">Sair</a>
+    </div>
+    <img src="/TurboStyle/img/svg/close-icon.svg" id="closeDropDow" alt="">
+  </div>         
+           
+           
+           
+    </section>
+    
+  </main>
+  
+    <script>
+      new DataTable('#minha-aluguel', {
+    layout: {
+        topStart: {
+            buttons: ['copy', 'excel', 'pdf', 'colvis']
+        }
+    },
+    responsive: true,
+    language: {
+        info: 'Mostrando a página _PAGE_ de _PAGES_ - Turbo Motors Software',
+        infoEmpty: 'Não há registros disponíveis',
+        infoFiltered: '(filtrado do total de _MAX_ registros)',
+        lengthMenu: 'Mostrar _MENU_ registros por página',
+        zeroRecords: 'Nada encontrado - desculpe turboMotors Developer',
+        search: "Localizar:"
+    },
+});
+new DataTable('#minha-tabela', {
+    layout: {
+        topStart: {
+            buttons: ['copy', 'excel', 'pdf', 'colvis']
+        }
+    },
+    responsive: true,
+    language: {
+        info: 'Mostrando a página _PAGE_ de _PAGES_ - Turbo Motors Software',
+        infoEmpty: 'Não há registros disponíveis',
+        infoFiltered: '(filtrado do total de _MAX_ registros)',
+        lengthMenu: 'Mostrar _MENU_ registros por página',
+        zeroRecords: 'Nada encontrado - desculpe turboMotors Developer',
+        search: "Localizar:"
+    },
+});
+
+  </script>
+
+  <script>
+      function chamarAjuda() {
+    introJs().setOptions({
+steps: [
+{
+  title: '<strong> Impressão de Relatório Geral </strong>!',
+  element: document.querySelector('.buttons-excel'),
+  intro: 'Confira listagem financeira em Excel'
+},
+{
+  title: '<strong>  Impressão de Relatório Geral - PDF </strong>!',
+  element: document.querySelector('.buttons-pdf'),
+  intro: 'Confira listagem financeira em PDF'
+},
+{
+  title: '<strong> Visibilidade das Colunas </strong>!',
+  element: document.querySelector('.buttons-collection '),
+  intro: 'Manipule quais colunas deseja exibir na tabela abaixo'
+},
+{
+  title: '<strong> Relatório Personalizado por Status </strong>!',
+  element: document.querySelector('.pdfTabela'),
+  intro: 'Obtenha Relatório financeiro filtrando pelo status da compra ou aluguel'
+}
+]
+}).start();
+   }
+</script>
+  <script src="/TurboStyle/index.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
+</body>
+</html>

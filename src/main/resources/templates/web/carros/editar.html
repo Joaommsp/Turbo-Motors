@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TurboMotors Admin</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <!-- <link rel="stylesheet" href="/TurboStyle/css/painel.css"> -->
+  <link rel="stylesheet" href="/TurboStyle/css/CadastroCarro.css">
+  <link rel="stylesheet" href="/TurboStyle/css/painel.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+  <!-- Inclua o jQuery (necessário para o DataTables) -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <!-- Inclua o DataTables CSS (para estilos da tabela) -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+
+  <!-- Inclua o DataTables JavaScript (para funcionalidade da tabela) -->
+  <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.6/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.2.6/css/buttons.dataTables.min.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.datatables.net/1.11.6/js/jquery.dataTables.min.js"></script>
+
+
+</head>
+
+<body>
+  <header class="cabecalho">
+    <div class="padrao">
+      <div class="titulo-hamb">
+        <a class="navbar-brand" href="#">
+          <strong class="mouseClick me-auto" style="color: white;">Turbo Motors</strong>
+        </a>
+        <div class="menu-toggle" onclick="toggleSidebar()">
+          <i class="bi bi-list"></i>
+        </div>
+      </div>
+
+      <div style="display: flex; justify-content: center; align-items: center ;">
+        <div style="margin-left: 2rem;">
+          <button onclick="MostrarAviso()" type="button" id="liveToastBtn"><i
+              class="meuAlerta bi bi-bell-fill"></i></button>
+          <span class="notification-badge">1</span>
+        </div>
+        <div>
+          <!-- SUBMENU UTILIZANDO BTP -->
+          <div class="dropdown btn-group">
+            <button id="menuDrop" class="btn" type="button" data-bs-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false">
+              <p id="meuUser" class="dropdown-toggle-text">...</p>
+            </button>
+            <div class="dropdown-menu dropdown-menu-animated">
+              <a class="dropdown-item" href="funcionario"><i class="bi bi-person-fill"></i> Minha Conta</a>
+              <a class="dropdown-item" href="CadastrarUsuario"><i class="bi bi-person-fill-gear"></i> Usuários</a>
+              <a class="dropdown-item" href="logout"><i class="bi bi-box-arrow-right"></i> Sair</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+
+      <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="10000">
+          <div class="toast-header">
+            <strong class="me-auto">Turbo Motors</strong>
+            <small>Agora</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+          </div>
+          <div class="toast-body">
+            <p id="mostrarUsuarioLogado">Olá</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </header>
+  <main class="principal">
+    <sidebar class="barraLateral">
+      <div class="perfil">
+        <img id="fotoUsuario" class="perfil-img" src="https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile-thumbnail.png">
+        <p id="usuarioLogado">...</p>
+        <p id="cargoUsuario">Software Developer</p>
+      </div>
+      <nav class="meuCSS sidebar card py-2 mb-4 meuMenu">
+        <ul class="nav flex-column" id="nav_accordion">
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/painel"><i class="bi bi-file-bar-graph"></i> Dashboard</a>
+          </li>
+          <li class="nav-item has-submenu">
+            <a class="nav-link" href="#"><i class="bi bi-car-front-fill"></i> Cadastros <i class="bi bi-chevron-down"></i> </a>
+            <ul class="submenu collapse">
+              <li><a class="nav-link" href="/admin/carro.html"><i class="bi bi-car-front-fill"></i> Cadastrar Carros</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item has-submenu">
+            <a class="nav-link" href="#"><i class="bi bi-car-front-fill"></i> Listagens <i class="bi bi-chevron-down"></i> </a>
+            <ul class="submenu collapse">
+              <li><a class="nav-link" href="/admin/listarFinanceiro"><i class="bi bi-car-front-fill"></i> Listar Financeiro</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/relatorios"><i class="bi bi-filetype-pdf"></i> Relatórios</a>
+          </li>
+        </ul>
+        </nav>
+    </sidebar>
+    <!-- Daqui par baixo é o conteúdo de cada página -->
+    <section class="conteudo-principal">
+      <div class="container-fluid">
+        <div>
+          <a href="/admin/carro.html" class="homePage__link">
+            <img src="/TurboStyle/img/svg/arrow-left.svg" alt="" />
+            Voltar</a>
+        </div>
+        <div id="cadastroCarros">
+          <form action="/admin/editarCArro"  method="POST" class="formularioRegistros row g-3" id="formularioRegistrosJS"
+            enctype="multipart/form-data">
+
+            <div id="btnContainer-bef" class="button-container">
+              <button type="button" class="btnTurboMotors" onclick="mostrarEdit()"><i class="bi bi-pencil-square"></i></button>
+              <button type="button" onclick="confirmacao()" class="btnTurboMotors"><i class="bi bi-trash3"></i></button>
+            </div>
+
+
+            <div class="button-save">
+              <button type="submit" class="btnTurboMotors"><i class="bi bi-floppy-fill"></i></button>
+              <button type="button" onclick="retornarDivCadastro()" class="btnTurboMotors"><i class="bi bi-x-circle-fill"></i></button>
+            </div>
+
+            <nav>
+              <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <button onclick="esconderTab()" class="nav-link active" id="nav-home-tab" data-bs-toggle="tab"
+                  data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home"
+                  aria-selected="true">Editar</button>
+
+              </div>
+            </nav>
+
+            <div class="tab-content" id="nav-tabContent">
+
+              <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+
+                <div class="bloqueado" style="pointer-events: none;">
+                  <div class="registrosFormularios">
+                    <div class="registroParte">
+                      <div class="caixaUm">
+                      <div class="form-group">
+                        <label for="id_carro">ID Carro</label>
+                        <input type="text" class="form-control" id="id_carro" th:field="*{carroEdit.idCarro}" name="idCarro"  style="pointer-events: none; background-color: whitesmoke;">
+
+                          
+                      </div>
+                      <div class="form-group">
+                        <label for="car_nome">Nome</label>
+                        <input type="text" class="form-control" id="car_nome" th:field="*{carroEdit.carNome}"
+                          name="carNome" required>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="car_nome">Placa</label>
+                        <input type="text" class="form-control" id="car_nome" th:field="*{carroEdit.carPlaca}"
+                          name="carPlaca" required>
+                      </div>
+                      <div class="form-group">
+                        <label for="car_ano">Ano</label>
+                        <input type="text" class="form-control" id="car_ano" th:field="*{carroEdit.carAno}"
+                          name="carAno" required>
+                      </div>
+
+                      <div class="form-group selectsDoBanco">
+                        <label style="display: block;" for="marcaId">Marca</label>
+                        <div class="selectBancos-button">
+                        <select class="form-select selectBanco" id="marcaId" name="idd_marca" required>
+                          <option value="" disabled="disabled" th:field="*{carroEdit.carPlaca}" selected="selected">
+                            Escolha a marca Desejada.</option>
+                          <option th:each="marca : ${listaMarcas}" th:value="${marca.idMarca}"
+                            th:text="${marca.marNome}">Marca</option>
+                        </select>
+                        <button type="button" class="addBtn" data-toggle="modal" data-target="#cadastrarMarcaModal"><img
+                            src="/TurboStyle/img/svg/add-icon.svg" alt=""></button>
+                          </div>
+                      </div>
+
+                      <div class="form-group selectsDoBanco">
+                        <label for="tipoId">Tipo do Veículos (Ex: SUV, Sedan..)</label>
+                         <div class="selectBancos-button">
+                        <select class="form-select selectBanco" id="tiposId" name="idTipo" required>
+                          <option value="" disabled="disabled" th:field="*{carroEdit.carPlaca}" selected="selected">
+                            Escolha o Tipo Desejado.</option>
+                          <option th:each="tipos : ${tiposCarros}" th:value="${tipos.idTipo}"
+                            th:text="${tipos.tipoNome}">Tipo</option>
+                        </select>
+                        <button type="button" class="addBtn" data-toggle="modal"
+                          data-target="#cadastrarColumnsModal"><img src="/TurboStyle/img/svg/add-icon.svg"
+                            alt=""></button>
+                            </div>
+
+                          </div>
+                          <div class="form-group">
+                            <label for="car_nome">Valor do Veículos</label>
+                            <input type="text" class="form-control" id="carValor" th:field="*{carroEdit.carValor}" name="carValor" aria-label="Amount (to the nearest dollar)" required>
+                          </div>
+                      </div>
+                    </div>
+
+                    <div class="registroParte2">
+                    <div class="caixaDois">
+                      <hr>
+                      <div class="principalImg">
+                        <div class="botaoUpload">
+                          <input type="file" onchange="showImagePreview()" class="form-control" id="car_imagem"
+                            name="imagemCarro">
+                          </div>
+                        <div class="minhaImagem" style="margin-top: 10px;" id="adicionarImagem">
+                          <img th:src="*{carroEdit.carUrl}" class="img-thumbnail" width="200" />
+                        </div>
+
+                      </div>
+                      <div class="form-group">
+                        <hr>
+
+                        <label for="car_nome">Disponivel para Vendas</label>
+
+                        <select class="form-select selectBanco" id="disponivel" name="disponivel" required>
+                           <option value="" disabled="disabled" selected="selected">Disponibilidade do Carro.</option>
+                           <option value="S">Sim</option>
+                           <option value="N">Não</option>
+                         </select>
+                       </div>
+
+                       <div class="form-group">
+                        <label for="car_descricao">Descrição (Limite de caracteres: 300)</label>
+                        <textarea   class="form-control" id="comentario" th:field="*{carroEdit.carDescricao}" name="carDescricao" required></textarea>     
+                      </div>
+
+                      <div class="form-group" style="display: none;">
+                        <label for="car_url">URL para Visualização (Somente Leitura)</label>
+                        <input style="width: 100% !important;" type="text" disabled  th:field="*{carroEdit.carUrl}" class="form-control" id="car_url">
+                      </div>
+                    </div>
+                  </div>
+                  </div>
+                </div>
+              </div>
+          </form>
+        </div>
+        </div>
+    </section>
+
+    
+  </main>  
+  <!-- <script src="/TurboStyle/index.js" defer></script> -->
+  <script src="/TurboStyle/index.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+new DataTable('#minha-tabela', {
+    language: {
+        info: 'Mostrando a página _PAGE_ de _PAGES_ - Turbo Motors Software',
+        infoEmpty: 'Não há registros disponíveis',
+        infoFiltered: '(filtrado do total de _MAX_ registros)',
+        lengthMenu: 'Mostrar _MENU_ registros por página',
+        zeroRecords: 'Nada encontrado - desculpe turboMotors Developer'
+    }
+});
+  </script>
+
+<script th:if="${meuErro}">
+  Swal.fire({
+  title: "Erro ao Importar Arquivo",
+  text: "Houve um erro ao importar o arquivo. Entre em contato com suporte técnico!",
+  icon: "error"
+  });
+</script>
+
+ <script th:if="${sucessoCarro}">
+const Toast = Swal.mixin({
+  toast: true,
+  position: "top-end",
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.onmouseenter = Swal.stopTimer;
+    toast.onmouseleave = Swal.resumeTimer;
+  }
+});
+Toast.fire({
+  icon: "success",
+  title: "Carro Editado com Sucesso"
+});
+  </script> 
+
+
+</body>
+</html>

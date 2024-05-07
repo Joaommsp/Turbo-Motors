@@ -1,0 +1,296 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Exo+2:wght@700&display=swap");
+
+body {
+  background-image: url(../../img/bg-image-login-signin.png);
+  height: 140vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  font-family: "Poppins", sans-serif;
+}
+.warning-msg,
+.error-msg {
+  margin: 10px 0;
+  padding: 7px;
+  border-radius: 3px 3px 3px 3px;
+}
+
+.error-msg {
+  color: #D8000C;
+  background-color: #FFBABA;
+}
+
+.warning-msg {
+  color: #9F6000;
+  background-color: #FEEFB3;
+}
+
+.navigation {
+  width: 80%;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+
+  padding: 1.5rem 3rem;
+  z-index: 10;
+  margin-bottom: 1rem;
+}
+
+.logo {
+  width: 124px;
+}
+
+.headerlinks {
+  display: flex;
+  gap: 24px;
+}
+
+.disableLink {
+  color: #808080;
+  text-decoration: none;
+}
+
+.disableLink:hover {
+  cursor: default;
+}
+
+.activeLink {
+  width: 100%;
+  text-decoration: none;
+  color: #0e1316;
+  font-weight: 500;
+}
+
+.mainContainer {
+  width: 100%;
+  height: 140vh;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+}
+
+#loginBntContainer {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+#loginPopup {
+  width: 60rem;
+  position: relative;
+  background-color: #f5f7f882;
+  border-radius: 10px;
+  z-index: 11;
+  padding-right: 0;
+  padding-left: 0;
+  box-shadow: 0px 0px 1.3px rgba(0, 0, 0, 0.081),
+    0px 0px 4.5px rgba(0, 0, 0, 0.119), 0px 0px 20px rgba(0, 0, 0, 0.2);
+}
+
+.displayNone {
+  display: none;
+}
+
+.blur {
+  filter: blur(5px);
+}
+
+.transitios1s {
+  transition: 1s;
+}
+
+.noPointerEvents {
+  pointer-events: none;
+}
+
+#loginPopupContainer {
+  width: 50%;
+  height: 100%;
+  padding-left: 0;
+  padding-right: 5rem;
+  overflow: hidden;
+}
+
+.formContainer {
+  width: 50%;
+}
+
+#loginBntContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+#loginPopupImg {
+  max-width: 455px;
+  object-fit: cover;
+  border-bottom-left-radius: 10px;
+  border-top-left-radius: 10px;
+  transition: .3s ease-in-out;
+}
+
+.formContainer {
+  padding-top: 1rem;
+  padding-right: 2rem;
+  padding-bottom: 2rem;
+  position: relative;
+}
+
+.loginCadastro__switcher {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+}
+
+.loginCadastro__switcher span {
+  font-weight: 500;
+}
+
+.loginCadastro__switcher button {
+  border: 0;
+  font-weight: 500;
+  color: #337ccf;
+  background-color: transparent;
+}
+
+.footer {
+  width: 100%;
+  height: 50px;
+  margin-top: 5rem;
+  position: absolute;
+  bottom: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #0e1316;
+}
+
+.footer span {
+  color: #ffffff;
+}
+
+.helpContainer {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+
+  background-color: #0e1316;
+  padding: 0.5rem 1rem;
+  border-radius: 56px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow: 0px 0px 47px rgba(255, 255, 255, 0.08);
+
+  z-index: 5000;
+}
+
+.helpContainer img {
+  width: 46px;
+  margin-right: 0.5rem;
+}
+
+.helpContainer a {
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: 500;
+  transition: 0.2s ease-in-out;
+}
+
+.helpContainer a:hover {
+  color: #dc3545;
+  font-weight: 500;
+}
+
+@media only screen and (max-width: 767px) {
+
+  body {
+    background-image: url(../../img/bg-image-login-signin.png);
+  }
+
+  .navigation {
+    width: 100%;
+  }
+  
+  .headerlinks {
+    align-items: center;
+  }
+  
+  .disableLink {
+    display: none;
+  }
+  
+  .activeLink {
+    font-weight: 500;
+    font-size: .8rem;
+  }
+  
+  #loginPopup {
+    width: 48rem;
+    height: 650px;
+    position: relative;
+    background-color: #f5f7f882;
+    border-radius: 10px;
+    z-index: 11;
+    padding-right: 0;
+    padding-left: 0;
+    box-shadow: 0px 0px 1.3px rgba(0, 0, 0, 0.081),
+      0px 0px 4.5px rgba(0, 0, 0, 0.119), 0px 0px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  #loginBntContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  #loginPopupContainer {
+    display: none;
+  }
+
+  .formContainer {
+    width: 90%;
+  }
+
+}
+
+@media screen and (max-width: 600px) {
+
+  body {
+    background-image: url(../../img/bg-image-login-signin.png);
+  }
+
+  #loginPopup {
+    width: 90%;
+    height: 574px;
+  }
+
+  #loginBntContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  #loginPopupContainer {
+    display: none;
+  }
+
+  .formContainer {
+    width: 100%;
+    padding-left: 2rem;
+    padding-top: 2rem;
+  }
+
+  .form-label {
+    font-size: .8rem;
+  }
+}

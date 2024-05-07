@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="pt-br" notranslate>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/TurboStyle/front-turbo/bibliotecas-principais/style.css">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <script src="https://unpkg.com/jwt-decode@3.1.2/build/jwt-decode.js"></script>
+  <script src="/TurboStyle/front-turbo/bibliotecas-principais/main.js" defer></script>
+  <script src="
+https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.all.min.js
+"></script>
+<link href="
+https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.min.css
+" rel="stylesheet">
+  <title>TurboMotors - 2023</title>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg bg-red boxShadow fixed" id="navBar">
+    <div class="container-fluid navBarMgLeft5 " id="navBarContent">
+      <a class="navbar-brand" href="#"><img src="/TurboStyle/img/Logo.png" alt="Turbo Motors Logo" id="logo"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" onclick="closeDropDow()">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse h" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active text-white underlineLink" aria-current="page" href="#" >Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white underlineLink " href="#">Sobre nós</a>
+          </li>
+         </ul>
+        </div>
+        <div class="collapse navbar-collapse h" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link text-white underlineLink" href="#">Comprar</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white underlineLink" href="#">Alugar</a>
+            </li>
+          </ul>
+        </div>
+        <div th:unless="${autenticado}" class="collapse navbar-collapse h navBarMgLeft30 loginDiv" id="navbarNav">
+          <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="#" id="loginBnt">Login</a>
+              </li>
+            </ul>
+          </div>
+          
+				<div th:if="${autenticado}" class="collapse navbar-collapse h navBarMgLeft30 loginDiv" id="navbarNav">
+							<nav class="navbar navbar-expand-lg navbar-light" style="color: white !important; list-style: none;">
+						        <li class="nav-item dropdown">
+									<a class="nav-link dropdown-toggle" th:text="'Olá, ' + ${autenticado.pesNome}" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+						          </a>
+
+						          <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+						            <li><a class="dropdown-item" href="/cliente/usuario">Meu Perfil</a></li>
+						            <li><a class="dropdown-item" href="/cliente/compras">Carrinho</a></li>
+						            <li><hr class="dropdown-divider"></li>
+						            <li><a class="dropdown-item" href="/cliente/sair">Sair</a></li>
+						          </ul>
+						        </li>
+						        <img id="main-image" th:src="${autenticado.url_anexo}" width="13%" style="border-radius: 50%;" />
+
+							</nav>
+				</div>
+      </div>
+    </div>
+  </nav>
+  <div class="container-fluid">
+  <main class="transitios1s">
+    <div class="container" id="banner" >
+      <div class="container" id="bannerPrimary" >
+        <h1 class="text-light mt-5">Seminovos pelo melhor preço do mercado</h1>
+        <h2 class="text-red">Contrate online sem burocracia!</h2>
+        <ul id="bannerList" class="text-white">
+          <li>✔ Sem aprovação de crédito</li>
+          <li>✔ Dirija KMs ilimitados</li>
+          <li>✔ Escolha como quer pagar</li>
+        </ul>
+      </div>
+      <div class="container" id="bannerPrimaryImages" >
+        <img src="/TurboStyle/img/banner-sw4-img.png" alt="Banner SW4 Image"  id="bannerImg"  class="img-fluid bannerImgAnimation">
+        <div class="container" >
+          <img src="/TurboStyle/img/EveryOneCanDrive-img.png" alt="Every One Can Drive Image"  id="bannerImg2"  class="img-fluid bannerImgAnimation">
+        </div>
+      </div>
+    </div>
+    <div class="container" id="secundaryBanner" >
+      <div class="slider">
+        <div><img src="/TurboStyle/img/banner2.png" alt="Banner Image" class="img-fluid"></div>
+        <div><img src="/TurboStyle/img/banner2.2.png" alt="Banner Image" class="img-fluid"></div>
+      </div>
+    </div>
+    <div class="container-fluid" id="showroom">
+      <h3><span>Compra e locação</span> de carros seminovos</h3>
+      <div class="container text-center" id="cards">
+        <div class="row">
+          <div class="col cardSpace" id="sedans">
+            <div class="showroom">
+              <div><img src="/TurboStyle/img/sedan/1.png" alt="Showroom Image"  class="img-fluid minwidth"></div>
+              <div><img src="/TurboStyle/img/sedan/2.png" alt="Showroom Image"  class="img-fluid minwidth"></div>
+              <div><img src="/TurboStyle/img/sedan/3.png" alt="Showroom Image"  class="img-fluid minwidth"></div>
+            </div>
+            <p class="local"> <img src="/TurboStyle/img/svg/local-icon.svg" alt="local Map Icon"> Paulo Afonso: Entrega: <span class="time">1 a 5 dias Úteis</span></p>
+            <p class="category">Sedan</p>
+            <div class="priceDiv">
+              <p>A partir de:</p>
+              <p class="price">
+                R$ 250,00/<span class="priceWeek">semana</span>
+              </p>
+            </div>
+            <button type="submit" class="btn bg-red btn-lg seeMoreBtn" id="sedanBtn"><a href="">Ver mais</a></button>
+          </div>
+          <div class="col cardSpace" id="mediumSedans">
+            <div class="showroom">
+              <div><img src="/TurboStyle/img/sedan medio/1.png" alt="Showroom Image"  class="img-fluid minwidth showroomImg"></div>
+              <div><img src="/TurboStyle/img/sedan medio/2.png" alt="Showroom Image"  class="img-fluid minwidth showroomImg"></div>
+              <div><img src="/TurboStyle/img/sedan medio/3.png" alt="Showroom Image"  class="img-fluid minwidth showroomImg"></div>
+            </div>
+            <p class="local"> <img src="/TurboStyle/img/svg/local-icon.svg" alt="local Map Icon"> Paulo Afonso: Entrega: <span class="time">1 a 5 dias Úteis</span></p>
+            <p class="category">Sedan Médio</p>
+            <div class="priceDiv">
+              <p>A partir de:</p>
+              <p class="price">
+                R$ 300,00/<span class="priceWeek">semana</span>
+              </p>
+            </div>
+            <button type="submit" class="btn bg-red btn-lg seeMoreBtn" id="mediumSedanBtn"><a href="">Ver mais</a></button>
+          </div>
+          <div class="col cardSpace" id="hatchs">
+            <div class="showroom">
+              <div><img src="/TurboStyle/img/compacto/1.png" alt="Showroom Image"  class="img-fluid minwidth"></div>
+              <div><img src="/TurboStyle/img/compacto/2.png" alt="Showroom Image"  class="img-fluid minwidth"></div>
+              <div><img src="/TurboStyle/img/compacto/3.png" alt="Showroom Image"  class="img-fluid minwidth"></div>
+            </div>
+            <p class="local"> <img src="/TurboStyle/img/svg/local-icon.svg" alt="local Map Icon"> Paulo Afonso: Entrega: <span class="time">1 a 5 dias Úteis</span></p>
+            <p class="category">Compacto</p>
+            <div class="priceDiv">
+              <p>A partir de:</p>
+              <p class="price">
+                R$ 200,00/<span class="priceWeek">semana</span>
+              </p>
+            </div>
+            <button type="submit" class="btn bg-red btn-lg seeMoreBtn" id="compactBtn"><a href="">Ver mais</a></button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col cardSpace" id="mediumHatchs">
+            <div class="showroom">
+              <div><img src="/TurboStyle/img/hatch/1.png" alt="Showroom Image"  class="img-fluid minwidth"></div>
+              <div><img src="/TurboStyle/img/hatch/2.png" alt="Showroom Image"  class="img-fluid minwidth"></div>
+              <div><img src="/TurboStyle/img/hatch/3.png" alt="Showroom Image"  class="img-fluid minwidth"></div>
+            </div>
+            <p class="local"> <img src="/TurboStyle/img/svg/local-icon.svg" alt="local Map Icon"> Paulo Afonso: Entrega: <span class="time">1 a 5 dias Úteis</span></p>
+            <p class="category">Hacth</p>
+            <div class="priceDiv">
+              <p>A partir de:</p>
+              <p class="price">
+                R$ 300,00/<span class="priceWeek">semana</span>
+              </p>
+            </div>
+            <button type="submit" class="btn bg-red btn-lg seeMoreBtn" id="hatchBtn"><a href="">Ver mais</a></button>
+          </div>
+          <div class="col cardSpace" id="pickUps">
+            <div class="showroom">
+              <div><img src="/TurboStyle/img/pickup/1.png" alt="Showroom Image"  class="img-fluid minwidth showroomImg"></div>
+              <div><img src="/TurboStyle/img/pickup/2.png" alt="Showroom Image"  class="img-fluid minwidth showroomImg"></div>
+              <div><img src="/TurboStyle/img/pickup/3.png" alt="Showroom Image"  class="img-fluid minwidth showroomImg"></div>
+            </div>
+            <p class="local"> <img src="/TurboStyle/img/svg/local-icon.svg" alt="local Map Icon"> Paulo Afonso: Entrega: <span class="time">1 a 5 dias Úteis</span></p>
+            <p class="category">Caminhonete</p>
+            <div class="priceDiv">
+              <p>A partir de:</p>
+              <p class="price">
+                R$ 450,00/<span class="priceWeek">semana</span>
+              </p>
+            </div>
+            <button type="submit" class="btn bg-red btn-lg seeMoreBtn" id="pickUpBtn"><a href="">Ver mais</a></button>
+          </div>
+          <div class="col cardSpace" id="suvs">
+            <div class="showroom">
+              <div><img src="/TurboStyle/img/SUV/1.png" alt="Showroom Image"  class="img-fluid minwidth"></div>
+              <div><img src="/TurboStyle/img/SUV/2.png" alt="Showroom Image"  class="img-fluid minwidth"></div>
+              <div><img src="/TurboStyle/img/SUV/3.png" alt="Showroom Image"  class="img-fluid minwidth"></div>
+            </div>
+            <p class="local"> <img src="/TurboStyle/img/svg/local-icon.svg" alt="local Map Icon"> Paulo Afonso: Entrega: <span class="time">1 a 5 dias Úteis</span></p>
+            <p class="category">SUV</p>
+            <div class="priceDiv">
+              <p>A partir de:</p>
+              <p class="price">
+                R$ 400,00/<span class="priceWeek">semana</span>
+              </p>
+            </div>
+            <button type="submit" class="btn bg-red btn-lg seeMoreBtn" id="suvbtn"><a href="">Ver mais</a></button>
+          </div>
+        </div>
+      </div>
+      <div class="container" id="terciaryBanner">
+        <div class="container-fluid">
+         <p class="text-white">
+          Quer seu Veículo mais rápido?
+         </p>
+         <span class="fontSmall text-white">Prefira contratar <span class="text-red">online</span>: em poucos passos, você já pode agendar a retirada</span>
+         <button type="button" class="btn text-white btn-lg" id="contractBtn"><a href="#showroom">Contratar Online</a></button>
+        </div>
+        <div class="container-fluid">
+          <p>
+            Carros seminovos a partir de:
+          </p>
+          <span id="demonstrationPrice">R$ 200,00/semana</span>
+          <img src="/TurboStyle/img/banner3.png" alt="" class="img-fluid" >
+          <span id="availabilityWarn">Modelos sujeitos a disponibilidade</span>
+        </div>
+    </div>
+  </main>
+  </div>
+  
+</body>
+</html>

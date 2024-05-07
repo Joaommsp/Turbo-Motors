@@ -1,0 +1,194 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --cor-primaria: #dc3545; 
+  --cor-secundaria: #171717; 
+  --cor-terciária: #337CCF; 
+  --cor-texto-white: #F5F7F8;
+  --cor-texto-black: #0F0F0F; 
+  --cor-texto-white: ##F5F7F8; 
+  --cor--white: #F5F7F8;
+  --ultra-white: #ffff;
+}
+
+
+body {
+  
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--cor--white);
+}
+
+
+.navigation {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+
+  padding: 1.5rem 3rem;
+  z-index: 10;
+  margin-bottom: 1rem;
+}
+
+.logo {
+  width: 124px;
+}
+
+.headerlinks {
+  display: flex;
+  margin-left: 1rem;
+  gap: 24px;
+}
+
+.disableLink {
+  color: #808080;
+  text-decoration: none;
+}
+
+.disableLink:hover {
+  cursor: default;
+}
+
+.activeLink {
+  width: 100%;
+  text-decoration: none;
+  color: #0e1316;
+  font-weight: 500;
+}
+
+.mainContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.menuFlex {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+/******* TELA DE USUARIO *************/
+
+.meuContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.informacaoPerfil {
+  background-color: #c3dafd;
+  
+  /** #5068D8; **/
+  
+}
+
+.meuPerfil {
+  display: flex;
+  justify-content: space-around;
+  padding: 5rem;
+}
+
+.cadastroPrincipal {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+.meuResumos {
+  color: #174eb0;
+}
+
+.formularioEditar {
+  margin-top: -4%;
+}
+
+.cadastroPrincipal input {
+  margin-bottom: 1rem;
+}
+
+.btnEdit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.meuButton {
+  width: 50%;
+}
+
+.meuEndereco {
+  display: flex;
+  padding: 1rem;
+}
+
+.meuEndereco input {
+  margin-bottom: 1rem;
+  width: 85%;
+} 
+
+.enderecoPart1 {
+  width: 50%;
+}
+.enderecoPart2{
+  width: 50%;
+}
+
+.titulo {
+  width: 100%;
+  text-align: center;
+}
+
+
+@media only screen and (max-width: 767px) {
+  .cadastroPrincipal {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    flex-direction: column;
+}
+.meuEndereco {
+  display: flex;
+  padding: 1rem;
+  flex-direction: column;
+}
+.enderecoPart1 {
+  width: 100%;
+}
+
+.enderecoPart2{
+  width: 100%;
+}
+
+.meuPerfil {
+  display: flex;
+  justify-content: space-around;
+  padding: 1rem;
+  flex-direction: column;
+  align-items: center;
+}
+.minhaFoto {
+  margin-bottom: 2rem;
+}
+
+.navigation {
+  width: 50%;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  padding: 1.5rem 3rem;
+  z-index: 10;
+  margin-bottom: 1rem;
+}
+}

@@ -1,0 +1,556 @@
+body, html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+
+}
+
+
+.perfil-img {
+    width: 85px;
+    height: 81px;
+    object-fit: cover;
+    border-radius: 100%;
+    margin-bottom: 1rem;
+    border: 5px solid #58b0ff57;
+}
+
+#liveToastBtn {
+  background-color: transparent;
+  border: none;
+}
+
+#removerHover:focus {
+  outline: 1 !important;
+}
+
+.principal {
+  display: flex;
+  min-height: 100%;
+}
+
+.barraLateral {
+  width: 245px;
+  background-color: white;
+  color: rgb(172 179 186);
+  padding: 20px;
+  transition: left 0.3s;
+  height: 100vh;
+
+}
+
+
+.barraLateral.fixa {
+  position: fixed;
+}
+
+.barraLateral .aberta {
+  left: 0; /* A posição quando a barra lateral está aberta */
+}
+.cabecalho {
+  background: #2f46d0;
+  height: 60px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+
+#graficosCarros {
+	height: 100% !important;
+}
+
+.graficos {
+  display: flex;
+  height: 80%;
+}
+
+#graficoCarros {
+  border-left: 4px solid #0174BE; 
+}
+
+.padrao {
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  width: 97%;
+
+}
+.padrao .titulo-hamb {
+  display: flex;
+  justify-content: space-between;
+  width: 250px;
+}
+
+#menuDrop {  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.btn:focus {
+  outline: 0 !important;
+  box-shadow: #2f46d0 !important;
+}
+
+
+#menu {
+  transition: .5s;
+}
+
+#menu:hover {
+  cursor: pointer;
+}
+
+
+/* Reescrita */
+/* .container-fluid {
+  width: 90%;
+} */
+
+.cabecalho .cabecalho {
+  display: flex;
+}
+.conteudo-principal {
+  background-color: #f8f8f8;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+
+}
+
+.menu-lateral ul ul {
+  display: none;
+}
+
+
+.perfil  {
+  font-size: 16px;
+  color: #00447e;
+  font-weight: 500;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.perfil p{
+  margin: 0;
+}
+
+
+.perfil{
+  width: 30%;
+  border-radius: 50%;
+  margin: auto;
+}
+
+.barraLatelra .perfil{
+  width: 100%;
+}  
+
+
+.meuMenu{
+  border: none !important;
+}
+
+
+
+/****************/
+/**/
+.card-box {
+    position: relative;
+    color: #fff;
+    padding: 20px 10px 40px;
+    margin: 20px 0px;
+}
+.card-box:hover {
+    text-decoration: none;
+    color: #f1f1f1;
+}
+.card-box:hover .icon i {
+    font-size: 100px;
+    transition: 1s;
+    -webkit-transition: 1s;
+}
+.card-box .inner {
+    padding: 5px 10px 0 10px;
+}
+.card-box h3 {
+    font-size: 27px;
+    font-weight: bold;
+    margin: 0 0 8px 0;
+    white-space: nowrap;
+    padding: 0;
+    text-align: left;
+}
+.card-box p {
+    font-size: 15px;
+}
+.card-box .icon {
+    position: absolute;
+    top: auto;
+    bottom: 5px;
+    right: 5px;
+    z-index: 0;
+    font-size: 72px;
+    color: rgba(0, 0, 0, 0.15);
+}
+.card-box .card-box-footer {
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    text-align: center;
+    padding: 3px 0;
+    color: rgba(255, 255, 255, 0.8);
+    background: rgba(0, 0, 0, 0.1);
+    width: 100%;
+    text-decoration: none;
+}
+.card-box:hover .card-box-footer {
+    background: rgba(0, 0, 0, 0.3);
+}
+.bg-blue {
+    background-color: #00c0ef !important;
+}
+.bg-green {
+    background-color: #00a65a !important;
+}
+.bg-orange {
+    background-color: #f39c12 !important;
+}
+.bg-red {
+    background-color: #d9534f !important;
+}
+
+.menu-lateral li:hover > ul {
+  display: block;
+}
+
+.button-container {
+  display: flex;
+  margin-top: 2rem;
+}
+
+.card-body {
+  width: 90% !important;
+}
+
+.esconder {
+  display: none;
+}
+
+.mostrar {
+  display: block;
+}
+
+.btnTurboMotors {
+  background: none; 
+  border: none;
+  padding: 0; 
+  cursor: pointer; 
+  margin-left: 20px;
+}
+
+.btnTurboMotors i {
+  font-size: 30px;
+  color: #424242;
+}
+
+.button-save {
+  display: none;
+  margin-top: 2rem;
+}
+.meuAlerta {
+  color: white !important;
+  font-size: 1.3rem;
+  margin-right: 20px;
+}
+
+.notification-badge {
+  position: absolute;
+  color: white;
+  top: 2%;
+  right: 7.5%;
+  background-color: #D80032;
+  width: 14px;
+  height: 16px;
+  text-align: center;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+h2 {
+  margin-top: 50px;
+}
+
+
+/*DROP DOW MENU */
+#dropDowBtn {
+  position: absolute;
+  right: 20%;
+  top: 12px;
+  background-color: transparent;
+  border: 0;
+  color: #ffff;
+  font-size: 1.5em;
+}
+
+#dropDowBtn img {
+  width: 25px;
+}
+
+#cardUser {
+  width: 100%;
+}
+
+
+#dropDowMenu {
+  width: 200px;
+  height: 0;
+  background-color: #ffff;
+  position: absolute;
+  top: 5rem;
+  right: 20%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: .5s;
+  box-shadow:
+  0px 0px 1.9px rgba(0, 0, 0, 0.07),
+  0px 0px 5.3px rgba(0, 0, 0, 0.1),
+  0px 0px 12.7px rgba(0, 0, 0, 0.13),
+  0px 0px 42px rgba(0, 0, 0, 0.2)
+;
+z-index: 1000;
+}
+
+#dropDowMenu div {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+#dropDowMenu img {
+  width: 25px;
+  transform: scale(1);
+  transition: .5s;
+}
+
+#dropDowMenu img:hover {
+  transform: scale(1.1);
+}
+
+#dropDowMenu a {
+  margin-left: 2.5rem;
+  text-decoration: none;
+  color: #45474B;
+  transition: .5s;
+  transform: scale(1)
+}
+
+#dropDowMenu a:hover {
+  transform: scale(1.2);
+}
+
+#closeDropDow {
+  position: absolute;
+  top: .5rem;
+  right: .5rem;
+  cursor: pointer;
+}
+
+/*
+Menu lateral design
+*/
+
+.meuCSS {
+  width: 100% !important;
+  border: none;
+  background-color: transparent !important;
+}
+
+.meuCSS {
+  background-color: #222;
+  color: #fff;
+  width: 300px;
+}
+
+.meuCSS a {
+  color: #191919;
+  text-decoration: none;
+  display: block;
+  padding: 10px 20px;
+  font-weight: 600px;
+}
+
+.meuCSS a:hover {
+
+}
+
+/* Estilos para os ícones */
+.meuCSS i {
+  margin-right: 10px;
+}
+
+
+.card-turbo {
+  border-left: 3px solid rgb(0, 55, 128);
+}
+
+.card-turbo i {
+  font-size: 2rem;
+  color: whitesmoke;
+}
+
+.card-body {
+  display: flex;
+  justify-content: space-between;
+}
+
+.menu-toggle {
+  cursor: pointer;
+  color: white;
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+.container.total {
+   background-color: red;
+}
+
+@media (max-width: 768px) {
+  .notification-badge {
+    position: absolute;
+    color: white;
+    top: 34%;
+    right: 34.5%;
+    background-color: #D80032;
+    width: 14px;
+    height: 16px;
+    text-align: center;
+    font-size: 10px;
+    font-weight: 600;
+}
+  .barraLateral {
+    display: none;
+    left: 0;
+    position:absolute;
+  }
+
+  .barraLateral.aberta {
+    display: block;
+    z-index: 999;
+  }
+
+  .cabecalho {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: space-around;
+    height: auto;
+    padding: 10px;
+  }
+
+  .titulo-hamb {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .menu-btn-label {
+    margin-left: 10px;
+  }
+
+  .caixaRegistro {
+    display: flex;
+    flex-direction: column;
+}
+
+#registerCarTerciary {
+  display: block;
+  width: 100%;
+}
+
+#dropDowBtn {
+  position: absolute;
+  right: 20%;
+  top: 16px;
+  background-color: transparent;
+  border: 0;
+  color: #ffff;
+  font-size: 1em;
+}
+
+#dropDowBtn img {
+  width: 25px;
+}
+
+#dropDowMenu {
+  background-color: #ffff;
+  position: absolute;
+  border-radius: 20px;
+  top: 5rem;
+  right: 10%;
+}
+
+}
+
+.formEditar {
+	display: flex;
+	justify-content: space-around;
+}
+
+.formEditar input {
+	width: 100% max-content;
+}
+
+.usuarioImagem {
+	width: 100% !important;
+}
+
+.dropdown-toggle-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+.meusGraficos {
+  display: flex;
+}
+
+@media (max-width: 760px) {
+
+  .cabecalho{
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+}
+.conteudo-principal a {
+  color: grey;
+  font-weight: 700;
+  font-size: 16px;
+  text-decoration: none;
+}
+
+.nav-item {
+  font-weight: bolder;
+}
+/* MUDANÇAS NA PAG RELATORIOS*/
+
+
+ /* NÃO MEXER AQUI */
+ /* .sorting {
+  background-color: #D80032 !important;
+ } */

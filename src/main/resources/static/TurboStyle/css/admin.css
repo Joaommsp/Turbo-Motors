@@ -1,0 +1,97 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #f3f3f3;
+}
+
+.container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.caixaPrincipal {
+    background-color: #fff;
+    width: 850px;
+    height: 450px !important;
+    border-radius: 0.5rem;
+}
+
+h3 {
+    text-align: center;
+    padding-top: 3rem;
+    font-weight: 700; 
+}
+
+
+.buttonTurboMotors {
+    width: 100%;
+    margin-top: 2rem;
+    background-color: #2f46d0;
+    color: white;
+}
+
+
+.caixaLogin {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100% !important;
+    width: 40%;
+}
+.caixaLogin .info p{
+    text-align: center;
+    font-weight: 400;
+}
+
+.mouseClick {
+    cursor: pointer;
+}
+
+.caixaImagem{ 
+    background-image: linear-gradient(to right, #2f46d0, #5a70f1);
+    width: 60%;
+
+}
+.caixaImagem .descricao {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: rgb(255, 255, 255);
+    font-weight: 700;
+    
+}
+
+
+
+input {
+    width: 100% !important;
+    height: 35px;
+}
+
+@media (max-width: 768px) {
+    .container {
+        height: 70vh;
+    }
+
+    .caixaPrincipal {
+        margin-top: 4rem;
+        height: 100%;
+        width: 100%;
+        font-size: 13px;
+
+    } 
+    .caixaLogin {
+        width: 100%;
+    }
+    .caixaImagem {
+     display: none;   
+    }
+}
+

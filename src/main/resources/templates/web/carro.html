@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TurboMotors Admin</title>
+  
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <!-- <link rel="stylesheet" href="/TurboStyle/css/painel.css"> -->
+  <link rel="stylesheet" href="/TurboStyle/css/CadastroCarro.css">
+  <link rel="stylesheet" href="/TurboStyle/css/painel.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+  <!-- Inclua o jQuery (necessário para o DataTables) -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <!-- Inclua o DataTables CSS (para estilos da tabela) -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+
+  <!-- Inclua o DataTables JavaScript (para funcionalidade da tabela) -->
+  <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.6/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.2.6/css/buttons.dataTables.min.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.datatables.net/1.11.6/js/jquery.dataTables.min.js"></script>
+
+  <!-- INTRO JS -->
+  <script src="/TurboStyle/biblioteca/intro/intro.min.js"></script>
+<link href="/TurboStyle/biblioteca/intro/introjs.min.css" rel="stylesheet">
+
+    
+
+
+</head>
+
+<body onload="chamarAjuda();">
+  <div class="cabecalho">
+    <div class="padrao">
+      <div class="titulo-hamb">
+        <a class="navbar-brand" href="#">
+          <strong class="mouseClick me-auto" style="color: white;">Turbo Motors</strong>
+        </a>
+        <div class="menu-toggle" onclick="toggleSidebar()">
+          <i class="bi bi-list"></i>
+        </div>
+      </div>
+
+          <div class="dropdown btn-group">
+            
+      <button  id="removerHover" onclick="MostrarAviso()"  type="button" style="color: white" class="btn position-relative btnMensagem">
+        <i class="bi bi-bell-fill"></i>
+        <span id="avisoMensagem" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+          1
+          <span class="visually-hidden">unread messages</span>
+        </span>
+      </button>
+
+            <button  id="menuDrop" class="btn" type="button" data-bs-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false">
+              <p id="meuUser" class="dropdown-toggle-text meuUserIntro">...</p>
+            </button>
+            <div class="dropdown-menu dropdown-menu-animated">
+              <a class="dropdown-item" href="funcionario"><i class="bi bi-person-fill"></i> Minha Conta</a>
+              <a class="dropdown-item" href="CadastrarUsuario"><i class="bi bi-person-fill-gear"></i> Usuários</a>
+              <a class="dropdown-item" href="logout"><i class="bi bi-box-arrow-right"></i> Sair</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      
+
+
+      <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="10000">
+          <div class="toast-header">
+            <strong class="me-auto">Turbo Motors</strong>
+            <small>Agora</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+          </div>
+          <div class="toast-body">
+            <p id="mostrarUsuarioLogado">Olá</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <main class="principal">
+    <sidebar class="barraLateral">
+      <div class="perfil">
+        <img id="fotoUsuario" class="perfil-img"
+          src="https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile-thumbnail.png">
+        <p id="usuarioLogado">...</p>
+        <p id="cargoUsuario">Software Developer</p>
+      </div>
+      <nav class="meuCSS sidebar card py-2 mb-4 meuMenu">
+        <ul class="nav flex-column" id="nav_accordion">
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/painel"><i class="bi bi-file-bar-graph"></i> Dashboard</a>
+          </li>
+          <li class="nav-item has-submenu">
+            <a class="nav-link" href="#"><i class="bi bi-car-front-fill"></i> Cadastros <i
+                class="bi bi-chevron-down"></i> </a>
+            <ul class="submenu collapse">
+              <li><a class="nav-link" href="/admin/carro.html"><i class="bi bi-car-front-fill"></i> Cadastrar Carros</a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item has-submenu">
+            <a class="nav-link" href="#"><i class="bi bi-car-front-fill"></i> Listagens <i
+                class="bi bi-chevron-down"></i> </a>
+            <ul class="submenu collapse">
+              <li><a class="nav-link" href="/admin/listarFinanceiro"><i class="bi bi-car-front-fill"></i> Listar
+                  Financeiro</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/relatorios"><i class="bi bi-filetype-pdf"></i> Relatórios</a>
+          </li>
+        </ul>
+      </nav>
+    </sidebar>
+    <!-- Daqui par baixo é o conteúdo de cada página -->
+    <section class="conteudo-principal">
+      
+      <div class="container-fluid">
+        <div id="cadastroCarros">
+          <form action="/admin/salvarCarro" method="POST" class="formularioRegistros row g-3" id="formularioRegistrosJS"
+            enctype="multipart/form-data">
+        
+            <div id="btnContainer-bef" class="button-container">
+              <div class="">
+              <button type="button" class="btnTurboMotors" onclick="mostrarSave()"><i
+                  class="bi bi-plus-circle-fill"></i></button>
+              <button type="button" onclick="confirmacao()" class="btnTurboMotors"><i class="bi bi-trash3"></i></button>
+              </div>
+
+              <div class="buttonAjuda">
+                <button onclick="chamarAjuda();" type="button" class="btn btn-primary">
+                  <i class="bi bi-question-octagon-fill"></i>
+                </button>
+              </div>
+            </div>
+
+
+            <div class="button-save">
+              <button type="submit" class="btnTurboMotors"><i class="bi bi-floppy-fill"></i></button>
+              <button type="button" onclick="retornarDivCadastro()" class="btnTurboMotors"><i
+                  class="bi bi-x-circle-fill"></i></button>
+            </div>
+
+            <nav>
+              <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <button onclick="esconderTab()" class="nav-link active" id="nav-home-tab" data-bs-toggle="tab"
+                  data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home"
+                  aria-selected="true">Cadastro</button>
+                <button onclick="mostrarTab()" class="nav-link localizarDiv" id="nav-profile-tab" data-bs-toggle="tab"
+                  data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile"
+                  aria-selected="false">Localizar</button>
+              </div>
+            </nav>
+
+            <div class="tab-content" id="nav-tabContent">
+
+              <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+
+                <div class="bloqueado" style="pointer-events: none;">
+                  <div class="registrosFormularios">
+                    <div class="registroParte">
+                      <div class="caixaUm">
+                      <div class="form-group">
+                        <label for="id_carro">ID Carro</label>
+                        <input type="text" class="form-control" id="id_carro" th:field="*{carroPadrao.idCarro}"
+                          name="idCarro" disabled>
+                          
+                      </div>
+                      <div class="form-group">
+                        <label for="car_nome">Nome</label>
+                        <input type="text" class="form-control" id="car_nome" maxlength="20" th:field="*{carroPadrao.carNome}"
+                          name="carNome" required>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="car_nome">Placa</label>
+                        <input type="text" class="form-control" id="carPlaca"  maxlength="10" th:field="*{carroPadrao.carPlaca}"
+                          name="carPlaca" required>
+                      </div>
+                      <div class="form-group">
+                        <label for="car_ano">Ano</label>
+                        <input type="text" class="form-control" id="car_ano" maxlength="4" th:field="*{carroPadrao.carAno}"
+                          name="carAno" required>
+                      </div>
+
+                      <div class="form-group selectsDoBanco">
+                        <label style="display: block;" for="marcaId">Marca</label>
+                        <div class="selectBancos-button">
+                        <select class="form-select selectBanco" id="marcaId" name="idd_marca" required>
+                          <option value="" disabled="disabled" th:field="*{carroPadrao.carPlaca}" selected="selected">
+                            Escolha a marca Desejada.</option>
+                          <option th:each="marca : ${listaMarcas}" th:value="${marca.idMarca}"
+                            th:text="${marca.marNome}">Marca</option>
+                        </select>
+                        <button type="button" class="addBtn" data-toggle="modal" data-target="#cadastrarMarcaModal"><img
+                            src="/TurboStyle/img/svg/add-icon.svg" alt=""></button>
+                          </div>
+                      </div>
+
+                      <div class="form-group selectsDoBanco">
+                        <label for="tipoId">Tipo do Veículos (Ex: SUV, Sedan..)</label>
+                         <div class="selectBancos-button">
+                        <select class="form-select selectBanco" id="tiposId" name="idTipo" required>
+                          <option value="" disabled="disabled" th:field="*{carroPadrao.carPlaca}" selected="selected">
+                            Escolha o Tipo Desejado.</option>
+                          <option th:each="tipos : ${tiposCarros}" th:value="${tipos.idTipo}"
+                            th:text="${tipos.tipoNome}">Tipo</option>
+                        </select>
+                        <button type="button" class="addBtn tipoAjuda" data-toggle="modal"
+                          data-target="#cadastrarColumnsModal"><img src="/TurboStyle/img/svg/add-icon.svg"
+                            alt=""></button>
+                            </div>
+
+                          </div>
+                          <div class="form-group">
+                            <label for="car_nome">Valor do Veículos</label>
+                            <input type="number" class="form-control" id="carValor" th:field="*{carroPadrao.carValor}" name="carValor" aria-label="Amount (to the nearest dollar)" required>
+                          </div>
+                      </div>
+                    </div>
+
+                    <div class="registroParte2">
+                    <div class="caixaDois">
+                      <hr>
+                      <div class="principalImg">
+                        <div class="botaoUpload">
+                          <label for="car_imagem">Imagem</label>
+                          <input type="file" onchange="showImagePreview()" class="form-control" id="car_imagem"
+                            name="imagemCarro">
+                          </div>
+                        <div class="minhaImagem" style="margin-top: 10px;" id="adicionarImagem">
+                          <img th:src="*{carroPadrao.carUrl}" class="img-thumbnail" width="200" />
+                        </div>
+
+                      </div>
+                      <div class="form-group">
+                        <hr>
+
+                        <label for="car_nome">Disponivel para Vendas</label>
+
+                        <select class="form-select selectBanco" id="disponivel" name="disponivel" required>
+                           <option value="" disabled="disabled" selected="selected">Disponibilidade do Carro.</option>
+                           <option value="S">Sim</option>
+                           <option value="N">Não</option>
+                         </select>
+                       </div>
+
+                       <div class="form-group">
+                        <label for="car_descricao">Descrição (Limite de caracteres: 300)</label>
+                        <textarea  maxlength="300" class="form-control" id="comentario" th:field="*{carroPadrao.carDescricao}" name="carDescricao" required></textarea>     
+                      </div>
+
+                      <div class="form-group" style="display: none;">
+                        <label for="car_url">URL para Visualização (Somente Leitura)</label>
+                        <input style="width: 100% !important; " type="text" disabled  th:field="*{carroPadrao.carUrl}" class="form-control" id="car_url">
+                      </div>
+                    </div>
+                  </div>
+                  </div>
+                </div>
+              </div>
+          </form>
+        </div>
+        </div>
+
+        <div class="tab-pane fade" id="nav-profile" role="tabpanel" style="display: none;" aria-labelledby="nav-profile-tab">
+          <div class="tabela">
+              <div class="table-responsive">
+                  <table id="minha-tabela" class="table table-bordered" style="width:100%">
+                      <thead>
+                          <tr>
+                              <th>Código do Carro</th>
+                              <th>Nome do Carro</th>
+                              <th>Placa</th>
+                              <th>Valor</th>
+                              <th>Editar</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr th:each="carrosDoSistema : ${carrosDoSistema}">
+                              <td th:text="${carrosDoSistema.idCarro}">Carregando Dados...</td>
+                              <td th:text="${carrosDoSistema.carNome}">Carregando Dados...</td>
+                              <td th:text="${carrosDoSistema.carPlaca}">Carregando Dados...</td>
+                              <td th:text="${carrosDoSistema.carValor}">Carregando Dados...</td>
+                              <td>
+                                  <a class="ajudaEdicao" th:href="@{'carros/editar/' + ${carrosDoSistema.idCarro}}" id="icone"><i class="bi bi-pencil-square"></i></a>
+                              </td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+      </div>
+      
+  
+    </section>
+
+
+
+    <!-- Modal de Cadastro de Marca -->
+    <div class="modal fade" id="cadastrarMarcaModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <form id="meuFormularioMarca">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Cadastro de Marcas</h5>
+              <button type="button" class="btn-close" data-dismiss="modal" aria-label="Fechar">
+
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body" id="divModalPrinicpal">
+
+              <!-- Remova o formulário interno -->
+              <div class="form-group">
+                <label for="mar_nome">Nome da Marca</label>
+                <input type="text" class="form-control" id="mar_nomeCadastro" maxlength="50" placeholder="Digite o nome da marca"
+                  name="marNome">
+              </div>
+              <div class="form-group">
+                <label for="id_marca">ID da Marca</label>
+                <input type="text" class="form-control" id="id_marca" placeholder="ID da marca" name="idMarca" disabled>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+              <!-- Remova o atributo 'onclick' e coloque o botão de envio dentro do formulário externo -->
+              <button type="button" class="btn btn-primary"
+                onclick="executarFuncaoAssincrona('meuFormularioMarca','mar_nomeCadastro')">Salvar</button>
+
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+
+
+    <!-- Modal de Cadastro de Tipo -->
+    <div class="modal fade" id="cadastrarColumnsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Cadastrar Tipos de Veículos</h5>
+            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Fechar">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          
+          <div class="modal-body">
+        
+            <form id="meuFormularioTipo">
+              <div class="form-group">
+                <label for="id_tipo">ID Tipo</label>
+                <input type="text" class="form-control" id="id_tipo" placeholder="ID do Tipo" disabled>
+              </div>
+              <div class="form-group">
+                <label for="tipo_nome">Nome do Tipo</label>
+                <input type="text" class="form-control" id="tipo_nome" placeholder="Digite o nome do tipo"
+                  name="tipoNome" required>
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text">Preço $</span>
+                <input type="text" class="form-control" id="valor_aluguel" aria-label="Valor do Aluguel diário"
+                  name="valorAluguel" required>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-primary"
+                  onclick="executarFuncaoAssincrona('meuFormularioTipo','tipo_nome')">Salvar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      </form>
+    </div>
+
+
+
+    <div class="container" id="dropDowMenu">
+      <div id="menuIcons">
+        <img src="/TurboStyle/img/svg/profile-icon.svg" alt="">
+        <img src="/TurboStyle/img/svg/users.svg" alt="">
+        <img src="/TurboStyle/img/svg/logout-icon.svg" alt="">
+      </div>
+      <div id="menuLinks">
+        <a href="funcionario">Meu Perfil</a>
+        <a href="CadastrarUsuario">Usuários</a>
+        <a href="logout">Sair</a>
+      </div>
+      <img src="/TurboStyle/img/svg/close-icon.svg" id="closeDropDow" alt="">
+    </div>
+
+
+  </main>
+  <!-- <script src="/TurboStyle/index.js" defer></script> -->
+  <script src="/TurboStyle/index.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+
+    
+
+    new DataTable('#minha-tabela', {
+      responsive: true,
+      language: {
+        info: 'Mostrando a página _PAGE_ de _PAGES_ - Turbo Motors Software',
+        infoEmpty: 'Não há registros disponíveis',
+        infoFiltered: '(filtrado do total de _MAX_ registros)',
+        lengthMenu: 'Mostrar _MENU_ registros por página',
+        zeroRecords: 'Nada encontrado - desculpe turboMotors Developer'
+      }
+    });
+  </script>
+
+  <script th:if="${meuErro}">
+    Swal.fire({
+      title: "Erro ao Importar Arquivo",
+      text: "Houve um erro ao importar o arquivo. Entre em contato com suporte técnico!",
+      icon: "error"
+    });
+  </script>
+
+
+  <script th:if="${sucessoCarro}">
+
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "center",
+      showConfirmButton: true,
+      didOpen: (toast) => {
+        toast.onmouseenter = Swal.stopTimer;
+        toast.onmouseleave = Swal.resumeTimer;
+      }
+    });
+    Toast.fire({
+      icon: "success",
+      title: "Carro cadastrado com sucesso!"
+    });
+    
+  </script>
+
+  <script>
+    function mostrarTab() {
+      var datatables = document.getElementById("nav-profile");
+      datatables.style.display = "inline";
+      console.log(datatables);
+      chamarAjudaLocalizar();
+    }
+
+    function esconderTab() {
+      var datatables = document.getElementById("nav-profile");
+      datatables.style.display = "none";
+      console.log(datatables);
+    }
+  </script>
+
+
+<script th:inline="javascript">
+  const idCarro = /*[[${erroUnique}]]*/ 'default id';
+</script>
+
+
+<script th:if="${erroUnique}">
+     const Toast = Swal.mixin({
+        toast: true,
+        position: "center",
+        showConfirmButton: true,
+        didOpen: (toast) => {
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
+        }
+    });
+
+    Toast.fire({
+        icon: "error",
+        title: idCarro
+    });
+</script>
+
+<script>
+   function chamarAjuda() {
+    introJs().setOptions({
+steps: [
+{
+  title: "<strong> Criar novos Registros e Deletar </strong>",
+  element: document.querySelector('.button-container'),
+  intro: 'Aqui você controla os registros do usuário, criando novos e deletando.'
+},
+{
+  title: '<strong> Localizar Carross </strong>!',
+  element: document.querySelector('.localizarDiv'),
+  intro: 'Confira carros cadastrado com opção de edição'
+},
+{
+  title: '<strong> Cadastrar Marcas </strong>!',
+  element: document.querySelector('.addBtn'),
+  intro: 'Cadastre novas marcas de Carros nessa opção +'
+},
+{
+  title: '<strong> Cadastrar Tipo </strong>!',
+  element: document.querySelector('.tipoAjuda'),
+  intro: 'Cadastre novos tipos de carros (Exemplo: Sedan, SUV)'
+}
+]
+}).start();
+   }
+
+   
+
+function chamarAjudaLocalizar() {
+introJs().setOptions({
+steps: [
+{
+  title: '<strong> Edição de novos Carros',
+  element: document.querySelector('.ajudaEdicao'),
+  intro: 'Edição de carros <br> <span>Desmarque para não exibir mais</span>: <input type="checkbox">'
+}
+]
+}).start();
+   }
+
+
+</script>
+
+</body>
+
+</html>

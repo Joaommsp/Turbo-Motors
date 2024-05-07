@@ -1,0 +1,325 @@
+/* REGISTRO NOME , PLACA ANO ... */
+
+#registerCarMain {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+}
+#registerCarMain div {
+  padding-left: 0;
+  padding-right: 0;
+}
+#registerCarMain input {
+  width: 95%;
+}
+
+/* REGISTRO MARCA E TIPO */
+#registerCarTerciary {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+#cadastroCarros{
+  background-color: rgb(255, 255, 255);
+  margin-top: 20px;
+  height: calc(50% - 56px);
+  border-radius: 0.5rem;
+
+  box-shadow:  9px 9px 18px #d9d9d9,
+  -9px -9px 18px #e7e7e7;
+
+}
+
+.registrosFormularios { 
+ background-color: #fff;
+  height: 39rem;
+  display: flex;
+}
+
+.registroParte { 
+width: 50%;
+}
+
+.form-group {
+  margin-bottom: 1rem !important;
+}
+.caixaUm {
+  width: 90%;
+  margin: 0 auto;
+}
+
+#comentario {
+  height: 90px;
+  resize: none;
+}
+
+.caixaDois input {
+  margin-bottom: 5rem;
+  width: 70%;
+}
+
+.caixaUm input {
+  width: 70%;
+}
+
+.registroParte2 {
+  width: 50%;
+}
+.formularioRegistros{
+  margin: 0;
+}
+/* 
+#registerCarTerciary div {
+  display: flex;
+  flex-direction: column;
+  margin-left: 1rem;
+  width: 100%;
+}
+
+#registerCarTerciary button img {
+  width: 42px;
+  margin-top: 1.2rem;
+}
+
+#registerCarTerciary  select {
+  width: 97%;
+} */
+
+#registerCarQuarternary {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+#registerCarQuarternary div {
+  display: flex;
+  flex-direction: column;
+  margin-left: 1rem;
+  width: 100%;
+}
+
+#registerCarQuarternary  button img {
+  width: 42px;
+  margin-top: 1.2rem;
+}
+
+#registerCarQuarternary  select {
+  width: 97%;
+}
+
+.addBtn {
+  width: 46px;
+  height: 46px;
+  display: flex;
+  background-color: transparent;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  border: 0;
+
+}
+
+.addBtn:hover {
+  background-color: transparent;
+}
+
+/* REGISTRAR VALOR , Desc, disponível */ 
+
+#priceDiv {
+  width: 70%;
+}
+
+#registerCarQuintennial {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 2.5rem;
+  width: 90%;
+  height: fit-content;
+  border: 2px solid rgba(0, 0, 0, 0.089);
+  padding: 1rem 1rem;
+  border-radius: 10px;
+}
+
+#registerCarQuintennial div {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+
+#registerCarQuintennial div:first-child {
+  margin-bottom: 1rem;
+}
+
+#car_valor  {
+  margin-left: 1rem;
+  width: 100%;
+}
+
+
+
+
+#form-description {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+#form-description textarea {
+  width: 97%;
+}
+
+.img-thumbnail{ 
+  padding: 0.25rem;
+  /* background-color: #fff; */
+  /* border: 1px solid #dee2e6; */
+  /* border-radius: 0.25rem; */
+  /* max-width: 100%; */
+  /* height: auto; */
+  width: 100%;
+  height: 100%;
+}
+
+#adicionarImagem {
+  width: 350px;
+  height: 250px;
+  border: 2px solid rgba(0, 0, 0, 0.144);
+  border-radius: 10px;
+}
+
+
+.tabela {
+  background-color: rgb(255, 255, 255);
+  border-radius: 0.5rem;
+}
+#car_imagem {
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
+
+#car_url {
+  margin-bottom: 1.5rem;
+}
+
+
+.caixaRegistro {
+
+  display: flex;
+
+}
+
+.selectBanco { 
+  width: 70%;
+}
+
+.selectsDoBanco {
+  margin-top: 10px;
+}
+
+.minhaImagem {
+  margin: 10px auto 0 !important;
+  width: 100%;
+  height: 100%;
+} 
+
+.checkBoxDisponivel {
+  background-color: rgb(54, 123, 252) !important;
+  width: 20px !important;
+  height: 30px !important;
+}
+
+
+.edicao { 
+	font-size: 1.2em;
+	text-align: center;
+	color: rgb(38, 106, 231);
+}
+
+.voltaroAoCarro i{
+	font-size: 1rem !important;
+	font-weight: 600 !important;
+}
+
+.voltaroAoCarro a {
+	text-decoration: none;
+	color: black;
+}
+
+.button-container {
+  border-radius: 10px;
+  padding: 0;
+}
+
+.selectBancos-button {
+  display: flex;
+  margin-bottom: 2rem;
+}
+
+.buttonAjuda{ 
+  margin-left: 82%;
+}
+
+
+/* MOBILE */
+
+
+@media (max-width: 760px) {
+
+  #priceDiv {
+  width: 90%;
+  }
+
+  .registrosFormularios {
+    background-color: #fff;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.registroParte {
+  width: 127%;
+}
+
+.registroParte2 {
+  width: 100%;
+}
+
+.buttonAjuda {
+  margin: 42%;
+}
+
+.principalImg {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+#adicionarImagem {
+  width: 100%;
+  height: 250px;
+  border: 2px solid rgba(0, 0, 0, 0.144);
+  border-radius: 10px;
+}
+.form-group {
+  margin-top: 2rem !important;
+  margin-bottom: 1.3rem !important;
+}
+}

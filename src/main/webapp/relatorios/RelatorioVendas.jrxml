@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.11.0.final using JasperReports Library version 6.11.0-0c4056ccaa4d25a5a8c45672d2f764ea3498bebb  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Cherry_Landscape" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="NoDataSection" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="7a5c9b49-9dc5-422a-ac69-e92cf61ef530">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Turbo Motors"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="StatusParam" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT 
+    c.pes_nome,
+    v.car_nome,
+    v.car_descricao,
+    COALESCE(v.car_valor, 0) as car_valor,
+    (SELECT SUM(cp.valor) FROM compra cp WHERE cp.status = $P{StatusParam}) as TotalDeTudo,
+    CASE 
+        WHEN ca.status = 'F' THEN 'Finalizado'
+        WHEN ca.status = 'C' THEN 'Cancelado'
+        WHEN ca.status = 'A' THEN 'Em Aberto'
+        ELSE 'Sem Status'
+    END AS StatusFinal
+FROM 
+    compra ca
+INNER JOIN 
+    veiculo v ON ca.id_veiculo = v.id_carro
+INNER JOIN 
+    cliente c ON c.id_cliente = ca.id_cliente
+WHERE 
+    ca.status = $P{StatusParam}]]>
+	</queryString>
+	<field name="pes_nome" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="pes_nome"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cliente"/>
+		<property name="com.jaspersoft.studio.field.name" value="pes_nome"/>
+	</field>
+	<field name="car_nome" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="car_nome"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="veiculo"/>
+		<property name="com.jaspersoft.studio.field.name" value="car_nome"/>
+	</field>
+	<field name="car_descricao" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="car_descricao"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="veiculo"/>
+		<property name="com.jaspersoft.studio.field.name" value="car_descricao"/>
+	</field>
+	<field name="car_valor" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="car_valor"/>
+		<property name="com.jaspersoft.studio.field.name" value="car_valor"/>
+	</field>
+	<field name="TotalDeTudo" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="TotalDeTudo"/>
+		<property name="com.jaspersoft.studio.field.name" value="TotalDeTudo"/>
+	</field>
+	<field name="StatusFinal" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="StatusFinal"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="66" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="0" width="800" height="66" backcolor="#8A0700" uuid="d8d9e644-3a32-491d-97cb-a277aff17133"/>
+				<staticText>
+					<reportElement style="SubTitle" x="475" y="10" width="316" height="50" backcolor="#FFFFFF" uuid="cfa21334-0634-4605-9ea7-aca4981f67e4"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Verdana" size="22" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Relatório de Vendas]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="SubTitle" x="0" y="10" width="316" height="50" forecolor="#FFFFFF" uuid="dfaf7a08-ecfe-4808-8eb4-8a181a4cbab1"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="22" isBold="true"/>
+					</textElement>
+					<text><![CDATA[TURBO MOTORS]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="23" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="2" width="802" height="18" backcolor="#D1D1D1" uuid="34fcf241-8464-4858-b5ac-7743cb2e964c"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="12" y="0" width="100" height="20" uuid="b6779867-7a7e-41c7-9909-ff9fd46c1fda"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Nome Cliente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="120" y="0" width="32" height="20" uuid="86d3472f-b036-44e0-b103-c2f8a6cebf80"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Carro]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="697" y="1" width="104" height="20" uuid="9ef26157-2dad-4c29-bfa2-df2b6211352c"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<text><![CDATA[Custo Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="180" y="1" width="120" height="20" uuid="98d75fe6-3bbb-404d-b305-01210b3f9728"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Descrição]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="630" y="1" width="47" height="20" uuid="596c0816-84f0-495e-8521-fe51960f9ffc"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Status]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField textAdjust="StretchHeight">
+				<reportElement x="12" y="0" width="100" height="17" uuid="72ef5907-0bb4-4e28-8cf5-54b9244bf603">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d84ac9fa-c169-4a9f-99a7-d59e9d230dd8"/>
+				</reportElement>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pes_nome}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="120" y="-1" width="60" height="17" uuid="567f7d9f-2d8b-429f-9719-11c200bb8da1">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="41574655-c943-4cb2-8388-a2bf6dc4bd5d"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{car_nome}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="180" y="0" width="440" height="17" uuid="f17f49a4-1873-427c-8778-4ee661dbaac7">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="32c1dc20-5672-4af8-aaa3-cda8e97c56bc"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{car_descricao}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement x="697" y="1" width="104" height="20" uuid="4a981f88-c0d6-42fb-acce-15ba7a2b7fd6">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d967f25a-34a9-48fb-a25c-9afced5598ee"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("R$ #,##0.00").format($F{car_valor})]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="20" width="800" height="1" uuid="4af9dc2e-09d4-4f4d-9de3-0257dba3169f">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+			</line>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="630" y="-2" width="67" height="20" uuid="6057c571-0f31-4575-885f-6dcb4200b7eb">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d967f25a-34a9-48fb-a25c-9afced5598ee"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{StatusFinal}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="37" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="5" width="802" height="32" forecolor="#D0B48E" backcolor="#8A0700" uuid="ffb10ec8-0371-4545-8eaa-96d62ad3cec0"/>
+				<textField textAdjust="StretchHeight" evaluationTime="Report">
+					<reportElement style="Column header" x="757" y="7" width="40" height="20" forecolor="#FFFFFF" uuid="b5521ea6-5f36-4864-856f-58d0bcd011f2"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Verdana" size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight">
+					<reportElement style="Column header" x="677" y="7" width="80" height="20" forecolor="#FFFFFF" uuid="e625ea3c-1741-4cfe-81cf-fbbdd00162c8"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Verdana" size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Página"+$V{PAGE_NUMBER}+"de"]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight" pattern="EEEEE dd MMMMM yyyy">
+					<reportElement style="Column header" x="2" y="7" width="197" height="20" forecolor="#FFFFFF" uuid="0c9f7e91-d3f5-47f9-82b7-0b2b3a43a5d6"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Verdana" size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="150" y="3" width="440" height="30" forecolor="#FFFFFF" uuid="8e6e7291-e0dc-48eb-abca-eba869cba2d4"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<text><![CDATA[Sistema desenvolvido por Turbo Motors]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="199" y="260" width="440" height="30" forecolor="#000000" uuid="d99e50c4-ead6-453d-8d26-8c549325b731"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<text><![CDATA[Sistema desenvolvido por Turbo Motors]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="55" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<rectangle>
+				<reportElement x="70" y="25" width="680" height="30" uuid="66e4dc9c-44cc-4e4a-a2b9-aa67baecc818"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="89" y="31" width="550" height="19" uuid="eab7a948-27fb-40da-9a5d-039eb5d84e6c"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement x="650" y="31" width="100" height="18" uuid="ed409020-b506-4858-9fec-27efbff68ac4"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("R$ #,##0.00").format($F{TotalDeTudo})]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+	<noData>
+		<band height="206">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="0" width="800" height="66" backcolor="#8A0700" uuid="701cea25-8721-4e70-ad67-a6c58b8ba56b"/>
+				<staticText>
+					<reportElement style="SubTitle" x="475" y="10" width="316" height="50" uuid="0fc182d6-1280-469c-9c6a-c77c6902e5d3"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Verdana" size="22" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Relatório de Vendas]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="SubTitle" x="0" y="10" width="316" height="50" forecolor="#FFFFFF" uuid="963b401f-606c-4b38-b5e0-f0a87224f7fb"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="22" isBold="true"/>
+					</textElement>
+					<text><![CDATA[TURBO MOTORS]]></text>
+				</staticText>
+			</frame>
+			<staticText>
+				<reportElement x="50" y="80" width="730" height="40" uuid="8b7b57c5-ca36-48ae-8220-95cc5c60d41f"/>
+				<textElement textAlignment="Center">
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sem Vendas no Status que foi solicitado. Tente novamente]]></text>
+			</staticText>
+		</band>
+	</noData>
+</jasperReport>
