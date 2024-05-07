@@ -9,6 +9,7 @@ body {
   background-position: center;
   font-family: "Poppins", sans-serif;
 }
+
 .warning-msg,
 .error-msg {
   margin: 10px 0;
@@ -73,6 +74,14 @@ body {
   position: relative;
 }
 
+.meuForm {
+
+
+  display: flex;
+  width: 110%;
+  justify-content: space-around;
+}
+
 #loginBntContainer {
   padding-left: 0;
   padding-right: 0;
@@ -131,6 +140,9 @@ body {
   transition: .3s ease-in-out;
 }
 
+.alongar {
+  width: 120%;
+}
 .formContainer {
   padding-top: 1rem;
   padding-right: 2rem;
@@ -220,20 +232,20 @@ body {
   .navigation {
     width: 100%;
   }
-  
+
   .headerlinks {
     align-items: center;
   }
-  
+
   .disableLink {
     display: none;
   }
-  
+
   .activeLink {
     font-weight: 500;
     font-size: .8rem;
   }
-  
+
   #loginPopup {
     width: 48rem;
     height: 650px;

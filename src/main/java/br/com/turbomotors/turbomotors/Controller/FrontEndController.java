@@ -119,7 +119,6 @@ public class FrontEndController {
 
 	@PostMapping("/criarCliente")
 	public ResponseEntity<?> criarClienteNovo(@RequestBody Cliente clienteBody, HttpServletRequest request) {
-		System.out.println("Body: " + clienteBody.toString());
 		
 		boolean existeCPF = cliente.existsByCpfCnpj(clienteBody.getCpfCnpj());
 		boolean existeEmail= cliente.existsByEmail(clienteBody.getEmail());
@@ -175,15 +174,20 @@ public class FrontEndController {
 			endereco.setBairro("Prencher");
 			endereco.setCep("Preencher");
 
+			// obter enderço enviado pelo json
+			List<Endereco> meuEnderecoBody = clienteBody.getEnderecos();
+			Endereco enderecoFormatado = meuEnderecoBody.get(0);
 
 			List<Endereco> minhaLista = new ArrayList<>();
+
 			minhaLista.add(endereco);
 			meuCliente.setEnderecos(minhaLista);
 
-			endereco.setNumero("Preencher");
-			endereco.setLogradouro("Preencher");
-			endereco.setComplemento("Preencher");					
-					
+			endereco.setNumero(enderecoFormatado.getNumero());
+			endereco.setLogradouro(enderecoFormatado.getLogradouro());
+			endereco.setBairro(enderecoFormatado.getBairro());
+			endereco.setComplemento(enderecoFormatado.getComplemento());	
+			endereco.setCep(enderecoFormatado.getCep());
 
 			cliente.save(meuCliente);
 
