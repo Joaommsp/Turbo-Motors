@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -177,7 +178,9 @@ public class IndexController {
 
         System.out.println(dadosVendas);
 
-        if(func.getPrimeiroAcesso().equalsIgnoreCase("S")) {
+        String primeiroAcesso = func.getPrimeiroAcesso();
+
+        if(primeiroAcesso.equalsIgnoreCase("S") || primeiroAcesso.equals("")) {
             minhaView.addObject("mostrarIntro", func);
             funcacao.updateAcesso(func.getUser(), "N");
         }
