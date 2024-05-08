@@ -32,6 +32,10 @@
       src="/TurboStyle/front-turbo/bibliotecas-principais/main.js"
       defer
     ></script>
+    <script
+      src="/TurboStyle/front-turbo/bibliotecas-principais/continueTest.js"
+      defer
+    ></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.all.min.js"></script>
     <link
       href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.min.css"
@@ -57,15 +61,28 @@
         </div>
       </div>
       <div th:if="${autenticado}" class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-         
+        <a
+          class="nav-link dropdown-toggle"
+          href="#"
+          id="navbarDropdown"
+          role="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
           <span th:text="${autenticado.pesNome}"></span>
-          <img th:src="${autenticado.url_anexo}" alt="Imagem do Usuário" class="rounded-circle" style="width: 30px; height: 30px; object-fit: cover;">
+          <img
+            th:src="${autenticado.url_anexo}"
+            alt="Imagem do Usuário"
+            class="rounded-circle"
+            style="width: 30px; height: 30px; object-fit: cover"
+          />
         </a>
         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
           <li><a class="dropdown-item" href="/cliente/compras">Perfil</a></li>
-          <li><a class="dropdown-item" href="/cliente/compras">Minhas Compras</a></li>
-          <li><hr class="dropdown-divider"></li>
+          <li>
+            <a class="dropdown-item" href="/cliente/compras">Minhas Compras</a>
+          </li>
+          <li><hr class="dropdown-divider" /></li>
           <li><a class="dropdown-item" href="/cliente/sair">Sair</a></li>
         </ul>
       </div>
