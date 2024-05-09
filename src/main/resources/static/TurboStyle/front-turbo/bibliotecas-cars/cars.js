@@ -17,15 +17,6 @@ const getTimeAndCountClicks = () => {
 
 getTimeAndCountClicks();
 
-// const talvez = window.confirm("quer limpar?");
-// if (talvez) {
-//   // Clear local storage for the current origin
-//   localStorage.clear();
-
-//   // Clear session storage for the current origin (temporary data)
-//   sessionStorage.clear();
-// }
-
 //Controle POPUOP de login
 
 let main = document.querySelector("main");

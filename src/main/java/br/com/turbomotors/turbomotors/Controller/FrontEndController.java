@@ -18,12 +18,15 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.catalina.connector.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -332,6 +335,20 @@ public class FrontEndController {
 	    	System.out.println("cooki encontrado :" + autenticado);
 	        return minhaviewSucesso;
 	    }
+	}
+
+	@DeleteMapping("excluirCarrinho")
+	public ResponseEntity deletarCarrinho(HttpServletRequest request, @RequestBody Integer simulacao ) {
+		
+		System.out.println("Entrou no endpoint");
+
+		int codigoCarro = simulacao;
+
+		String autenticado = CookieService.getCookie(request, "usuarioId");
+		Integer codigoClienteBeta = 0;
+		int codigoCliente = codigoClienteBeta.valueOf(autenticado);
+		carrinhoAcao.deletarCairro(codigoCliente, codigoCarro);
+		return ResponseEntity.ok().build();
 	}
 	
 	@PostMapping("criarPagamento")

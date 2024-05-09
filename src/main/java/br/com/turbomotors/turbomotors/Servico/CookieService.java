@@ -17,7 +17,7 @@ public class CookieService {
 		response.addCookie(jwtSecurityCookie);
 		
 	}
-	
+
 	public static String getCookie(HttpServletRequest request, String key) {
 		return Optional.ofNullable(request.getCookies())
 				.flatMap(cookies -> Arrays.stream(cookies)

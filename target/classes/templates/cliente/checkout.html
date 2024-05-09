@@ -4,14 +4,18 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-  
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+		crossorigin="anonymous"></script>
+
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 
 	<link rel="stylesheet" href="/TurboStyle/front-turbo/checkout.css">
 	<script src="https://code.jquery.com/jquery-3.6.4.slim.min.js"></script>
 	<script src="/TurboStyle/front-turbo/bibliotecas-principais/main.js" defer></script>
+	<script src="/TurboStyle/front-turbo/bibliotecas-principais/testeCheckout.js" defer></script>
 	<script src="
 https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.all.min.js
 "></script>
@@ -55,13 +59,13 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.min.css
 	</header>
 	<section class="principalCompras">
 		<div th:if="${carrinhoVazio}" style="display: flex; justify-content: center; align-items: center; width: 100%;">
-			<img src="/TurboStyle/img/lupa.png" alt="Turbo Motors Logo"/>
+			<img src="/TurboStyle/img/lupa.png" alt="Turbo Motors Logo" />
 			<h4>Sem carros no momento</h4>
 		</div>
 		<div th:unless="${carrinhoVazio}" class="comprasCarro">
 
 
-			<div  th:unless="${carrinhoVazio}" id="container">
+			<div th:unless="${carrinhoVazio}" id="container">
 				<div class="progress px-1" style="height: 3px;">
 					<div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0"
 						aria-valuemax="100"></div>
@@ -72,8 +76,9 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.min.css
 					<div class="step-circle" onclick="displayStep(3)">3</div>
 				</div>
 
-				
-				<form th:unless="${carrinhoVazio}" action="/cliente/criarPagamento" method="post" id="multi-step-form" style="height: 100%;">
+
+				<form th:unless="${carrinhoVazio}" action="/cliente/criarPagamento" method="post" id="multi-step-form"
+					style="height: 100%;">
 					<div class="step step-1">
 						<!-- Step 1 form fields here -->
 						<h3>Envio</h3>
@@ -84,37 +89,37 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.min.css
 									style="background: none; border: none; outline: none;" id="id_cliente"
 									name="id_cliente">
 
-									<div style="margin-top: 20px; margin-bottom: 20px;">
-										<h5>Dados do Cliente para Contato</h5>
-										<div class="row">
-											<div class="col-md-6">
-												<div class="dados">
-													<p><strong>Nome Comprador:  </strong></p>
-													<p th:text="${info[1]}"></p>
-												</div>
-											</div>
-											<div class="col-md-6">
-												<div class="dados">
-													<p><strong>CPF/CNPJ:  </strong></p>
-													<p th:text="${info[7]}"></p>
-												</div>
+								<div style="margin-top: 20px; margin-bottom: 20px;">
+									<h5>Dados do Cliente para Contato</h5>
+									<div class="row">
+										<div class="col-md-6">
+											<div class="dados">
+												<p><strong>Nome Comprador: </strong></p>
+												<p th:text="${info[1]}"></p>
 											</div>
 										</div>
-										<div class="row">
-											<div class="col-md-6">
-												<div class="dados">
-													<p><strong>Contato Celular:  </strong></p>
-													<p th:text="${info[8]}"></p>
-												</div>
-											</div>
-											<div class="col-md-6">
-												<div class="dados">
-													<p><strong>E-mail para Contato:  </strong></p>
-													<p th:text="${info[9]}"></p>
-												</div>
+										<div class="col-md-6">
+											<div class="dados">
+												<p><strong>CPF/CNPJ: </strong></p>
+												<p th:text="${info[7]}"></p>
 											</div>
 										</div>
 									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<div class="dados">
+												<p><strong>Contato Celular: </strong></p>
+												<p th:text="${info[8]}"></p>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="dados">
+												<p><strong>E-mail para Contato: </strong></p>
+												<p th:text="${info[9]}"></p>
+											</div>
+										</div>
+									</div>
+								</div>
 
 								<!-- Endereço do Cliente -->
 								<div class="col-auto mt-0">
@@ -134,7 +139,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.min.css
 										</div>
 									</div>
 									<div class="row">
-		
+
 										<div class="col-md-4 dadosEndereco">
 											<p><strong>Bairro:</strong></p>
 											<p th:text="${info[5]}"></p>
@@ -156,30 +161,37 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.min.css
 						<h3>Pagamento</h3>
 						<div class="mb-3">
 							<div class="row mt-4">
-								<div class="col"><p class="text-muted mb-2">DETALHES PAGAMENTO</p><hr class="mt-0"></div>
+								<div class="col">
+									<p class="text-muted mb-2">DETALHES PAGAMENTO</p>
+									<hr class="mt-0">
+								</div>
 							</div>
-							
+
 							<div class="form-group">
 								<label for="NAME" class="small text-muted mb-1">NOME PAGADOR</label>
-								<input type="text" class="form-control form-control-sm" name="nomePagador" id="NAME" aria-describedby="helpId" placeholder="Nome igual está no cartão">
+								<input type="text" class="form-control form-control-sm" name="nomePagador" id="NAME"
+									aria-describedby="helpId" placeholder="Nome igual está no cartão">
 							</div>
-						   
+
 							<div class="form-group">
 								<label for="NAME" class="small text-muted mb-1">NÚMERO DO CARTÃO</label>
-								<input type="text" class="form-control form-control-sm" name="numeroCartao" id="NAME" aria-describedby="helpId" placeholder="4534 5555 5555 5555">
+								<input type="text" class="form-control form-control-sm" name="numeroCartao" id="NAME"
+									aria-describedby="helpId" placeholder="4534 5555 5555 5555" maxlength="20">
 							</div>
 							<div class="row no-gutters">
 								<div class="col-sm-6 pr-sm-2">
 									<div class="form-group">
 										<label for="NAME" class="small text-muted mb-1">EXPIRAÇÃO DO CARTÃO
 										</label>
-										<input type="text" class="form-control form-control-sm" name="cardExpiracao" id="NAME" aria-describedby="helpId" placeholder="06/21">
+										<input type="text" class="form-control form-control-sm" name="cardExpiracao"
+											id="NAME" aria-describedby="helpId" placeholder="06/21">
 									</div>
 								</div>
 								<div class="col-sm-6">
 									<div class="form-group">
 										<label for="NAME" class="small text-muted mb-1">CVC CODE</label>
-										<input type="text" class="form-control form-control-sm" name="descricao" id="NAME" aria-describedby="helpId" placeholder="183">
+										<input type="text" class="form-control form-control-sm" name="descricao"
+											id="NAME" aria-describedby="helpId" placeholder="183">
 									</div>
 								</div>
 							</div>
@@ -192,24 +204,28 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.min.css
 						<!-- Step 3 form fields here -->
 						<h3>Confirmar Pagamento</h3>
 						<div class="mb-3">
-							<img src="/TurboStyle/img/Pagamento.png" alt="Turbo Motors Logo" class="logo" style="display: block; margin: 0 auto;"/>
+							<img src="/TurboStyle/img/Pagamento.png" alt="Turbo Motors Logo" class="logo"
+								style="display: block; margin: 0 auto;" />
 							<div class="confirmacao-pagamento">
 								<p>Antes de confirmar, verifique os detalhes do pagamento abaixo:</p>
 								<p>[Detalhes do pagamento]</p>
-								<p>Ao clicar em "Confirmar Pagamento", você autoriza a transação. Certifique-se de que todas as informações estão corretas.</p>
+								<p>Ao clicar em "Confirmar Pagamento", você autoriza a transação. Certifique-se de que
+									todas as informações estão corretas.</p>
 							</div>
 						</div>
 						<button type="button" class="meuBotaoVoltar  prev-step">Voltar</button>
-						<button type="submit" class="meuBotao">Confirmar Pagamento</button>
+						<button type="submit" class="meuBotao" id="buyBtn">Confirmar Pagamento</button>
 					</div>
 				</form>
 			</div>
-			<div  th:unless="${carrinhoVazio}"   class="meusCarros">
+			<div th:unless="${carrinhoVazio}" class="meusCarros">
 				<div th:each="carros : ${carros}">
 					<div class="col-auto dadoscarros">
+						<p th:unless="false" style="display: block;" id="codigoCarro" th:text="${carros[4]}"></p>
 						<img class="img-fluid" th:src="${carros[2]}" width="80" height="62">
 						<p class="mb-0 texto" th:text="${carros[1]}"></p> <!-- car_nome -->
-						<span class="badge badge-light">X</span>
+						<button class="badge badge-light" th:onclick="'javascript:deletarCarrinho(' +${carros[4]} + ')'"
+							style="background: none; border: none;">X</button>
 					</div>
 				</div>
 			</div>
@@ -260,6 +276,30 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.min.css
 				$(".progress-bar").css("width", progressPercentage + "%");
 			}
 		});
+
+		function deletarCarrinho(idCarro) {
+			console.log(idCarro)
+			const url = `excluirCarrinho`;
+
+			
+
+
+			fetch(url, {
+				method: 'DELETE',
+				headers: {
+            'Content-Type': 'application/json'
+        },
+        body: idCarro
+			}).then(response => {
+				return response;
+			}).then(data => {
+				if(data.ok) {
+					window.location.reload();
+				}
+			})
+		}
+
+
 	</script>
 
 </body>
