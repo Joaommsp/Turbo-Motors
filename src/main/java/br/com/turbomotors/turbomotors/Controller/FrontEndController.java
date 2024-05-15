@@ -244,6 +244,7 @@ public class FrontEndController {
 		        long dias = diferenca.toDays();
 				Carrinho meuAluguel = new Carrinho();
 				meuAluguel.setDataInicio(dataInicia);
+				meuAluguel.setDataFim(dataFinal);
 				meuAluguel.setVeiculo(carroComprado);
 				meuAluguel.setCliente(meuCliente);
 				meuAluguel.setTipoCarrinho("A");
