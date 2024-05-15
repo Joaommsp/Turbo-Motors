@@ -71,7 +71,7 @@
                     </div>
                   </div>
                   <div class="col-md-6">
-                    <form action="/cliente/compraCarro" method="post">
+                    <form  id="carForm"  action="/cliente/compraCarro" method="post">
                       <div class="product p-4">
                         <div class="d-flex justify-content-between align-items-center">
                           <div class="d-flex align-items-center">
@@ -100,7 +100,7 @@
                           </div>
                           <p class="about" th:text="${carroInfo[3]}">.</p>
 
-                          <button class="btn btn-danger text-uppercase mr-2 px-4">
+                          <button id="comprarBtn" class="btn btn-danger text-uppercase mr-2 px-4" type="button">
                             Comprar Veículo
                           </button>
                           <br /><br />
@@ -113,17 +113,17 @@
                           </h6>
                           <div class="form-group">
                             <label for="start_date">Data Início:</label>
-                            <input type="datetime-local" class="form-control" id="start_date" required name="dataInicial" />
+                            <input type="datetime-local" class="form-control" id="start_date"  name="dataInicial" />
                           </div>
                           <div class="form-group">
                             <label for="end_date">Data Fim:</label>
-                            <input type="datetime-local" class="form-control" id="end_date" required name="dataFinal" />
+                            <input type="datetime-local" class="form-control" id="end_date"  name="dataFinal" />
                           </div>
                         </div>
 
                         <div class="cart mt-4 align-items-center">
-                          <button type="submit" class="btn btn-danger text-uppercase mr-2 px-4">
-                            Alugar
+                          <button id="alugarBtn" class="btn btn-danger text-uppercase mr-2 px-4" type="button">
+                            Alugar Veículo
                           </button>
                           <i class="fa fa-heart text-muted"></i>
                           <i class="fa fa-share-alt text-muted"></i>
@@ -176,6 +176,56 @@
       title: "Senha incorreta. Tente novamente",
     });
   </script>
+
+<script>
+   const sweetAlertToast = Swal.mixin({
+      toast: true,
+      position: "center",
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.onmouseenter = Swal.stopTimer;
+        toast.onmouseleave = Swal.resumeTimer;
+      },
+    });
+
+
+    function mensagemToast(tipo, mensagem) {
+      sweetAlertToast.fire({
+      icon: tipo,
+      title: mensagem,
+    });
+    }
+
+  document.getElementById("comprarBtn").addEventListener("click", function() {
+    document.getElementById("carForm").submit();
+  });
+
+  document.getElementById("alugarBtn").addEventListener("click", function() {
+    console.log("Clicou para alugar, verificando etapas...")
+    var startDate = document.getElementById("start_date").value;
+    var endDate = document.getElementById("end_date").value;
+
+    console.log(startDate + " < > " + endDate)
+
+    if (startDate == '' || endDate == '') {
+      mensagemToast("error","Por favor, preencha as datas de início e fim.");
+      return;
+    } else {
+      startDate = new Date(startDate)
+      endDate = new Date(endDate);
+    }
+
+    if (endDate <= startDate) {
+      mensagemToast("warning","A data de fim deve ser maior que a data de início.");
+      return;
+    }
+    document.getElementById("carForm").action = "/cliente/alugarCarro";
+    document.getElementById("carForm").submit();
+  });
+
+</script>
 
   <script>
 
