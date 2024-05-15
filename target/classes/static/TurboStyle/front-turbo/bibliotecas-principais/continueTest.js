@@ -1,20 +1,21 @@
-const getContext = localStorage.getItem("proposta");
-console.log(
-  "Proposta do site de acordo com o usuário: " + getContext.toString()
-);
-
-// const getTotalFlowTime = localStorage.getItem("flowTime");
-// console.log(
-//   "Tempo de navegação até o momento " +
-//     getTotalFlowTime.toString() +
-//     " segundos"
-// );
-
 const getTimeAndCountClicksFromPreviousPages = () => {
   let time = Number.parseFloat(localStorage.getItem("flowTime"));
+  let clicks = Number.parseFloat(localStorage.getItem("countCliks"));
+
+  document.addEventListener("click", () => {
+    localStorage.setItem("countCliks", (clicks += 1));
+  });
+
   const timeCount = setInterval(() => {
     localStorage.setItem("flowTime", (time += 1));
-    console.log("tempo de navegação até o momento: " + time);
+    console.log(
+      "tempo de navegação até o momento: " +
+        time +
+        " segundos(s)\n" +
+        " Quantidade de cliques até o momento: " +
+        clicks +
+        " clique(s)"
+    );
   }, 1000);
 
   return timeCount;

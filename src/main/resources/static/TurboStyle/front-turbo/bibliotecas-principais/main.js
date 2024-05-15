@@ -87,53 +87,24 @@ seeMoreBtn.forEach((e) => {
 
 // Teste de usabilidade Parte 01
 
-const contextTest = () => {
-  let contextProposedByUser = "";
-
-  let userIsReady = false;
-
-  const getContextIfExists = localStorage.getItem("proposta");
-  if (getContextIfExists == null) {
-    userIsReady = window.confirm(
-      "Teste 01: Identifique a proposta principal do site , você terá 10 segundos"
-    );
-
-    if (userIsReady == true) {
-      const timeToUserThink = setInterval(() => {
-        contextProposedByUser = window.prompt(
-          "Qual a proposta principal deste site ?"
-        );
-        while (contextProposedByUser == null) {
-          contextProposedByUser = window.prompt(
-            "Qual a proposta principal deste site ?"
-          );
-        }
-        localStorage.setItem("proposta", contextProposedByUser);
-        showContextResults();
-        getTimeAndCountClicks();
-        clearInterval(timeToUserThink);
-      }, 2000);
-    }
-  }
-};
-
-contextTest();
-
-const showContextResults = () => {
-  const getContext = localStorage.getItem("proposta");
-  window.alert(
-    "Proposta do site de acordo com o usuário: " + getContext.toString()
-  );
-};
-
 const getTimeAndCountClicks = () => {
-  window.alert("Agora Tente alugar ou comprar um veículo");
+  let initialTime = 0;
+  let initialCliks = 0;
 
-  let time = 0;
+  document.addEventListener("click", () => {
+    localStorage.setItem("countCliks", (initialCliks += 1));
+  });
+
   const timeCount = setInterval(() => {
-    localStorage.setItem("flowTime", (time += 1));
-    console.log(time);
+    localStorage.setItem("flowTime", (initialTime += 1));
+
+    console.log(
+       "Tempo de navegação até o momento: " + initialTime + " segundo(s) \n"
+       + "Quantidade de cliques até o momento: " + initialCliks + " clique(s)"
+    );
   }, 1000);
 
   return timeCount;
 };
+
+getTimeAndCountClicks();

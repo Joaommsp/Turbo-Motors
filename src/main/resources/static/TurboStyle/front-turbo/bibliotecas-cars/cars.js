@@ -1,15 +1,22 @@
 // Teste de fluxo vindo da página inicial
-
-const getContext = localStorage.getItem("proposta");
-console.log(
-  "Proposta do site de acordo com o usuário: " + getContext.toString()
-);
-
 const getTimeAndCountClicks = () => {
   let time = Number.parseFloat(localStorage.getItem("flowTime"));
+  let clicks = Number.parseFloat(localStorage.getItem("countCliks"));
+
+  document.addEventListener("click", () => {
+    localStorage.setItem("countCliks", (clicks += 1));
+  });
+
   const timeCount = setInterval(() => {
     localStorage.setItem("flowTime", (time += 1));
-    console.log("tempo de navegação até o momento: " + time);
+    console.log(
+      "tempo de navegação até o momento: " +
+        time +
+        " segundos(s)  \n" +
+        "Quantidade de cliques: " +
+        clicks +
+        " clique(s)"
+    );
   }, 1000);
 
   return timeCount;

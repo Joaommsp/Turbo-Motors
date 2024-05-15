@@ -1,17 +1,19 @@
-const contextResult = localStorage.getItem("proposta");
 const timeResult = Number.parseFloat(localStorage.getItem("flowTime"));
+const cliqueResult = Number.parseFloat(localStorage.getItem("countCliks"));
 
 const showResults = () => {
   window.alert(
-    "Contexto: " +
-      contextResult +
+    "Quantidade de cliques: " +
+      cliqueResult +
+      " clique(s)" +
       "\n" +
       "Tempo até comprar ou alugar veículo: " +
-      timeResult
+      timeResult +
+      " segundos(s)"
   );
 
-  const talvez = window.confirm("quer limpar?");
-  if (talvez) {
+  const resetTest = window.confirm("Deseja enviar o resultado do teste atual?");
+  if (resetTest) {
     // Clear local storage for the current origin
     localStorage.clear();
 
@@ -20,6 +22,4 @@ const showResults = () => {
   }
 };
 
-if (contextResult != null && timeResult != null) {
-  showResults();
-}
+showResults();
