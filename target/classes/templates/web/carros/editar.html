@@ -183,11 +183,12 @@
                         <label style="display: block;" for="marcaId">Marca</label>
                         <div class="selectBancos-button">
                         <select class="form-select selectBanco" id="marcaId" name="idd_marca" required>
-                          <option value="" disabled="disabled" th:field="*{carroEdit.carPlaca}" selected="selected">
+                          <option value="" disabled="disabled" th:text="${carroEdit.marca.marNome}" selected="selected">
                             Escolha a marca Desejada.</option>
                           <option th:each="marca : ${listaMarcas}" th:value="${marca.idMarca}"
                             th:text="${marca.marNome}">Marca</option>
                         </select>
+
                         <button type="button" class="addBtn" data-toggle="modal" data-target="#cadastrarMarcaModal"><img
                             src="/TurboStyle/img/svg/add-icon.svg" alt=""></button>
                           </div>
@@ -197,7 +198,7 @@
                         <label for="tipoId">Tipo do Veículos (Ex: SUV, Sedan..)</label>
                          <div class="selectBancos-button">
                         <select class="form-select selectBanco" id="tiposId" name="idTipo" required>
-                          <option value="" disabled="disabled" th:field="*{carroEdit.carPlaca}" selected="selected">
+                          <option value="" disabled="disabled" th:text="*{carroEdit.tipo.tipoNome}" selected="selected">
                             Escolha o Tipo Desejado.</option>
                           <option th:each="tipos : ${tiposCarros}" th:value="${tipos.idTipo}"
                             th:text="${tipos.tipoNome}">Tipo</option>

@@ -113,10 +113,12 @@ public class FrontEndControllerLogin {
 
 	@GetMapping("/filtro")
 	public RedirectView getMethodName(@RequestParam String nome, RedirectAttributes redirecionarAtributos) {
-		List<Veiculo> minhaLista = carros.obterCarrosDisponiveis(nome);
+		List<Object[]>  minhaLista = carros.obterCarrosDisponiveis(nome);
 		if(!(minhaLista.isEmpty())) {
-			redirecionarAtributos.addFlashAttribute("carroTipos", minhaLista.toString());
+			redirecionarAtributos.addFlashAttribute("carroTipos", minhaLista);
+			System.out.println(minhaLista);
 			return new RedirectView("/inicio/carros", true);
+			
 		}
 		return new RedirectView("/inicio/carros", true);
 	}

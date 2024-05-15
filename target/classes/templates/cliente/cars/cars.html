@@ -61,10 +61,13 @@
     margin-left: 20px;
     width: 30%;
 ">Localizar</button>
+        <button type="submit" class="btn btn-danger" style="
+        margin-left: 20px;
+        width: 30%;
+    " onclick="retornarAnterior()" th:if="${param.model == null}">Limpar e Mostrar Todos</button>
        </div>
       </div>
     </div>
-
    </form>>
   </section>
   <section class="exibirCarros">
@@ -79,6 +82,9 @@
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
+
+
+
         
                   <!-- Grid de Produtos -->
                   <div th:if="${carroTipos}" class="row">
@@ -105,5 +111,16 @@
   </section>
   
 </body>
+<script>
+  function retornarAnterior() {
+    window.location.href = window.location.origin + carroFiltro;
+  }
 
+  var carroFiltro;
+  if(carroFiltro == "") {
+   carroFiltro = window.location.search;
+  }
+  console.log("carro filtro" + carroFiltro)
+
+</script>
 </html>

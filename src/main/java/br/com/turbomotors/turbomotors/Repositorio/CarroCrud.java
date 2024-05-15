@@ -27,9 +27,13 @@ public interface CarroCrud extends JpaRepository<Veiculo, Long> {
 
    
 
+    @Query(value = "SELECT v.car_nome, m.mar_nome, v.car_url, t.valor_aluguel, v.car_valor, t.tipo_nome, v.id_carro " +
+            "FROM veiculo v " +
+            "INNER JOIN tipo t ON t.id_tipo = v.id_tipo " +
+            "INNER JOIN marca m ON v.id_marca = m.id_marca " +
+            "WHERE v.car_nome LIKE %:carNome% and v.disponivel = 'S'", nativeQuery = true)
+    List<Object[]> obterCarrosDisponiveis(@Param("carNome") String carNome);
 
-    @Query("SELECT v FROM Veiculo v WHERE v.carNome = ?1 AND v.disponivel = 'S'")
-    List<Veiculo> obterCarrosDisponiveis(String carNome);
     
     
     @Query(value = "SELECT v.car_nome, m.mar_nome, v.car_url, t.valor_aluguel, v.car_valor, t.tipo_nome, v.id_carro " +

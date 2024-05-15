@@ -221,13 +221,30 @@ public class CarrosController {
                                    RedirectAttributes redirecionarAtributos) throws Exception {
        String urlRedirect = "carros/editar/" + carros.getIdCarro();
 
+
+       ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+       HttpServletRequest request = attributes.getRequest();
+       String baseUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
+
 	   Veiculo infoCarros = service.findByIdOrdernado(idTipo);
       
+       
+       UUID gerarGuid = UUID.randomUUID();
+       String gerarNovoNome = gerarGuid.toString() + '_' + file.getOriginalFilename();
+
+       String urlContexto = "";
+
+
+
 	  if(carros.getCar_nome_arquivo() == null) {
 		  if(infoCarros.getCarImagem() != null ) {
 			  carros.setCar_nome_arquivo(infoCarros.getCar_nome_arquivo());
+              carros.setCarImagem(infoCarros.getCarImagem());
+              carros.setCarUrl(infoCarros.getCarUrl());
 		  }
-	  } 	
+	  } else {
+            urlContexto = baseUrl + "/img/" + gerarNovoNome;
+      } 	
 	   
 	   
        String nome = file.getOriginalFilename().toLowerCase();
@@ -236,14 +253,7 @@ public class CarrosController {
            redirecionarAtributos.addFlashAttribute("meuErro", null);
        }
        
-       ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-       HttpServletRequest request = attributes.getRequest();
-       String baseUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
 
-       UUID gerarGuid = UUID.randomUUID();
-       String gerarNovoNome = gerarGuid.toString() + '_' + file.getOriginalFilename();
-
-       String urlContexto = baseUrl + "/img/" + gerarNovoNome;
 
        ModelAndView minhaView = new ModelAndView("web/carro");
        Tipo meuTipo =  serviceipo.findByVeiculosIdtipo(idTipo);
@@ -268,7 +278,6 @@ public class CarrosController {
                carros.setCarUrl(urlContexto);
                carros.setCarImagem(binarioCarro); 
                carros.setCar_nome_arquivo(gerarNovoNome);
-               
 
                
            } catch(IOException e) {
@@ -283,7 +292,7 @@ public class CarrosController {
         redirecionarAtributos.addFlashAttribute("sucessoCarro", carros);
 
     } catch(DataIntegrityViolationException  e) {
-        redirecionarAtributos.addFlashAttribute("erroUnique", "Atenção! A placa fornecida já está associado em um registro. Por favor, utilize ");
+        redirecionarAtributos.addFlashAttribute("erroUnique", "Atenção! A placa fornecida já está associado em um registro. Por favor, utilize outra ");
 
     }
            return new RedirectView(urlRedirect);
