@@ -88,7 +88,7 @@ public class FrontEndController {
 	
 	/// Criei documentação seguida > https://reflectoring.io/spring-boot-cookies/
 	@PostMapping("/login")
-	public RedirectView autenticar(HttpServletResponse response, @RequestParam("email") String usuario, @RequestParam("senha") String Senha, RedirectAttributes redirecionarAtributos) {
+	public RedirectView autenticar(HttpServletResponse response, HttpServletRequest request, @RequestParam("email") String usuario, @RequestParam("senha") String Senha, RedirectAttributes redirecionarAtributos) {
 		System.out.println("| - Login : " + LocalDate.now());
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		Cliente usuarios = cliente.findByEmail(usuario);
@@ -103,15 +103,14 @@ public class FrontEndController {
 		
 		  if (senhaCorreta) {
 			 CookieService.setCookie(response, "usuarioId", String.valueOf(usuarios.getIdCliente()) , 36000);
-			 
-			 if(primeiroAcesso.equalsIgnoreCase("S")) {
-				redirecionarAtributos.addFlashAttribute("mostrarAjuda", "mostrarAjuda");
-				cliente.updateAcesso(usuario);
-			 } 
+			 String compras = CookieService.getCookie(request, "comprar");
 			 redirecionarAtributos.addFlashAttribute("logadoSucesso", "semLogin");
-			 return new RedirectView("/inicio/", true);
 
-
+			if(compras != null && compras.isEmpty() == false) {
+				return new RedirectView(compras, true);
+			} else {
+				 return new RedirectView("/inicio/", true);
+			}
 	        } else {
 	        	 redirecionarAtributos.addFlashAttribute("errorLogin", "Senha incorreta!");
 	           return new RedirectView("/inicio/userClient/", true);
@@ -131,15 +130,15 @@ public class FrontEndController {
 			throw  new RuntimeException("Sem Dados!");
 		}
 		if (existeCPF) {
-            return ResponseEntity.badRequest().body("{'error': 'Já existe um usuário com este CPF.'}");
+            return ResponseEntity.badRequest().body("Já existe um usuário com este CPF.");
         } else if (existeEmail) {
-            return ResponseEntity.badRequest().body("{'error': 'Já existe um usuário com este E-mail.'}");
+            return ResponseEntity.badRequest().body("Já existe um usuário com este E-mail.");
         } else if (existeTelefone) {
-            return ResponseEntity.badRequest().body("{'error': 'Já existe um usuário com este Telefone.'}");
+            return ResponseEntity.badRequest().body("Já existe um usuário com este Telefone.");
         } else if (existsByNomeUsuario) {
-            return ResponseEntity.badRequest().body("{'error': 'Já existe um usuário com este Nome de Usuário.'}");
+            return ResponseEntity.badRequest().body("Já existe um usuário com este Nome de Usuário.");
         } else if (existsByPesNome){
-            return ResponseEntity.badRequest().body("{'error': 'Já existe um usuário com este usuário'}");
+            return ResponseEntity.badRequest().body("Já existe um usuário com este usuário");
 		} else {
 
 			String meuCpfCnpj = clienteBody.getCpfCnpj().replaceAll("[^\\d]", ""); // Remove todos os caracteres não numéricos
@@ -253,8 +252,6 @@ public class FrontEndController {
 		        
 		        
 			}
-	    	
-	    	
 			return new RedirectView("/cliente/compras", true);
 	    }
 		

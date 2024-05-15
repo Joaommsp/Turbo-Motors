@@ -159,7 +159,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.min.css
 					<div class="step step-2">
 						<!-- Step 2 form fields here -->
 						<h3>Pagamento</h3>
-						<div class="mb-3">
+						<div class="mb-3" id="pagamentoID">
 							<div class="row mt-4">
 								<div class="col">
 									<p class="text-muted mb-2">DETALHES PAGAMENTO</p>
@@ -169,14 +169,15 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.min.css
 
 							<div class="form-group">
 								<label for="NAME" class="small text-muted mb-1">NOME PAGADOR</label>
-								<input type="text" class="form-control form-control-sm" name="nomePagador" id="NAME"
-									aria-describedby="helpId" placeholder="Nome igual está no cartão">
+								<input type="text" class="form-control form-control-sm" name="nomePagador"
+									id="nomePagador" aria-describedby="helpId" placeholder="Nome igual está no cartão">
 							</div>
 
 							<div class="form-group">
 								<label for="NAME" class="small text-muted mb-1">NÚMERO DO CARTÃO</label>
-								<input type="text" class="form-control form-control-sm" name="numeroCartao" id="NAME"
-									aria-describedby="helpId" placeholder="4534 5555 5555 5555" maxlength="20">
+								<input type="text" class="form-control form-control-sm" name="numeroCartao"
+									id="numeroCartao" aria-describedby="helpId" placeholder="4534 5555 5555 5555"
+									maxlength="16">
 							</div>
 							<div class="row no-gutters">
 								<div class="col-sm-6 pr-sm-2">
@@ -184,14 +185,14 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.min.css
 										<label for="NAME" class="small text-muted mb-1">EXPIRAÇÃO DO CARTÃO
 										</label>
 										<input type="text" class="form-control form-control-sm" name="cardExpiracao"
-											id="NAME" aria-describedby="helpId" placeholder="06/21">
+											id="cardExpiracao" aria-describedby="helpId" placeholder="06/21" maxlength="5">
 									</div>
 								</div>
 								<div class="col-sm-6">
 									<div class="form-group">
 										<label for="NAME" class="small text-muted mb-1">CVC CODE</label>
 										<input type="text" class="form-control form-control-sm" name="descricao"
-											id="NAME" aria-describedby="helpId" placeholder="183">
+											id="cvcCode" aria-describedby="helpId" placeholder="183">
 									</div>
 								</div>
 							</div>
@@ -232,6 +233,20 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.min.css
 	</section>
 
 	<script>
+
+		const Toast = Swal.mixin({
+			toast: true,
+			position: "center",
+			showConfirmButton: false,
+			timer: 3000,
+			timerProgressBar: true,
+			didOpen: (toast) => {
+				toast.onmouseenter = Swal.stopTimer;
+				toast.onmouseleave = Swal.resumeTimer;
+			}
+		});
+
+
 		var currentStep = 1;
 		var updateProgressBar;
 
@@ -244,13 +259,45 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.min.css
 			}
 		}
 
+		function verificarCamposCartao() {
+			console.log("verificnado");
+			const nomePagador = document.getElementById('nomePagador').value.trim();
+			const numeroCartao = document.getElementById('numeroCartao').value.trim();
+			const cardExpiracao = document.getElementById('cardExpiracao').value.trim();
+			let retorno = "";
+			if (nomePagador === '' || numeroCartao === '' || cardExpiracao === '') {
+				retorono = "Por favor, preencha todos os campos do cartão.";
+				return retorono;
+			} else {
+				return true;
+			}
+			console.log('Dados do cartão estão completos. Enviando para o servidor...');
+		}
+
+
 		$(document).ready(function () {
 			$('#multi-step-form').find('.step').slice(1).hide();
 
 			$(".next-step").click(function () {
 				if (currentStep < 3) {
 					$(".step-" + currentStep).addClass("animate__animated animate__fadeOutLeft");
-					currentStep++;
+					console.log(currentStep)
+
+					if (currentStep == 2) {
+						let retorno = verificarCamposCartao();
+						if (retorno != true) {
+							currentStep = 2;
+							Toast.fire({
+								icon: "error",
+								title: retorno
+							});
+						} else {
+							currentStep++;
+						}
+					} else {
+						currentStep++;
+					}
+					console.log(currentStep)
 					setTimeout(function () {
 						$(".step").removeClass("animate__animated animate__fadeOutLeft").hide();
 						$(".step-" + currentStep).show().addClass("animate__animated animate__fadeInRight");
@@ -262,6 +309,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.min.css
 			$(".prev-step").click(function () {
 				if (currentStep > 1) {
 					$(".step-" + currentStep).addClass("animate__animated animate__fadeOutRight");
+					console.log(currentStep)
 					currentStep--;
 					setTimeout(function () {
 						$(".step").removeClass("animate__animated animate__fadeOutRight").hide();
@@ -281,19 +329,19 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.min.css
 			console.log(idCarro)
 			const url = `excluirCarrinho`;
 
-			
+
 
 
 			fetch(url, {
 				method: 'DELETE',
 				headers: {
-            'Content-Type': 'application/json'
-        },
-        body: idCarro
+					'Content-Type': 'application/json'
+				},
+				body: idCarro
 			}).then(response => {
 				return response;
 			}).then(data => {
-				if(data.ok) {
+				if (data.ok) {
 					window.location.reload();
 				}
 			})

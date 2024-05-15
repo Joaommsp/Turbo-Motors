@@ -94,7 +94,7 @@ function enviarDadosCliente() {
     }]
     };
 
-     if(nome == "" || email == "" || senha == "" || cpfCnpj == "" || cpfCnpj == "" || telefone == "") {
+     if(nome == "" || email == "" || senha == "" || cpfCnpj == "" || cpfCnpj == "" || telefone == "" || bairro == "" || cep == "" || complemento == "" || numeroCasa == "") {
         mensagemError("Algum campo está nulo ou vázio. Tente novamente");
         
      } else {
@@ -129,14 +129,14 @@ function enviarDadosCliente() {
     .then(dadosResposta => {
         console.log('Resposta da API:', dadosResposta);
       
-        return dadosResposta;
+        return JSON.stringify(dadosResposta);
     })
     .catch(erro => {
         Toast.fire({
             icon: "warning",
             title: erro.message
         });
-        console.error('Erro ao enviar os dados:', erro);
+        console.log(erro.message)
     });
 
 
