@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import br.com.turbomotors.turbomotors.Tabelas.Carrinho;
 import br.com.turbomotors.turbomotors.Tabelas.Cliente;
 import br.com.turbomotors.turbomotors.Tabelas.Compra;
+import br.com.turbomotors.turbomotors.Tabelas.Veiculo;
 
 @Repository
 @Transactional
@@ -27,6 +28,15 @@ public interface CarrinhoRepository extends JpaRepository<Carrinho, Long> {
 
     @Query("SELECT c FROM Carrinho c WHERE c.cliente = ?1")
     List<Carrinho> obterCarrinho(Cliente cliente);
+
+
+    @Modifying
+    @Query(value = "insert into log_compra (lg_tempo ,lg_cliques, id_compra, id_usuario) values (:lg_tempo, :lg_cliques, :id_compra, :id_usuario);", nativeQuery = true)
+    void inserirLog(@Param("lg_tempo") String tempoTotal, @Param("lg_cliques") String cliques, @Param("id_compra") Long id_Compra, @Param("id_usuario") Long id_usuario );
+
+
+    @Query(value = "select id_veiculo from carrinho where id_usuario = :usuario and id_veiculo = :idCarro limit 1", nativeQuery = true)
+    String verificarExistenciaCarrinho(@Param("usuario") Long usuario, @Param("idCarro") Long idCarro);    
 
     @Modifying
     @Query(value="delete from carrinho where id_usuario = :codigoUsuario and id_veiculo = :codigoCarro", nativeQuery=true)

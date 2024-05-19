@@ -182,7 +182,7 @@
                       <div class="form-group selectsDoBanco">
                         <label style="display: block;" for="marcaId">Marca</label>
                         <div class="selectBancos-button">
-                        <select class="form-select selectBanco" id="marcaId" name="idd_marca" required>
+                        <select class="form-select selectBanco" id="marcaId" name="idd_marca">
                           <option value="" disabled="disabled" th:text="${carroEdit.marca.marNome}" selected="selected">
                             Escolha a marca Desejada.</option>
                           <option th:each="marca : ${listaMarcas}" th:value="${marca.idMarca}"
@@ -197,7 +197,7 @@
                       <div class="form-group selectsDoBanco">
                         <label for="tipoId">Tipo do Veículos (Ex: SUV, Sedan..)</label>
                          <div class="selectBancos-button">
-                        <select class="form-select selectBanco" id="tiposId" name="idTipo" required>
+                        <select class="form-select selectBanco" id="tiposId" name="idTipo">
                           <option value="" disabled="disabled" th:text="*{carroEdit.tipo.tipoNome}" selected="selected">
                             Escolha o Tipo Desejado.</option>
                           <option th:each="tipos : ${tiposCarros}" th:value="${tipos.idTipo}"

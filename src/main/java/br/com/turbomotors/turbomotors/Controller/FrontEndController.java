@@ -226,7 +226,14 @@ public class FrontEndController {
 			Tipo meutipo = carroComprado.getTipo();
 			BigDecimal valorDias = meutipo.getValorAluguel();
 	    	
+			String verificarCarrinho = carrinhoAcao.verificarExistenciaCarrinho(autenticadoID, carroComprado.getIdCarro());
 	    	
+			boolean existsCarro = verificarCarrinho == null ? true : false;
+
+			if(!existsCarro) {
+				System.out.println("Redirenciando, existencia de carrinho detectado !!!!!!");
+				return new RedirectView("/cliente/compras", true);
+			}
 	    	
 			if(dtFinal == null ||dtFinal.equals("")) {
 				LocalDateTime hrCompra = LocalDateTime.now();
@@ -350,12 +357,17 @@ public class FrontEndController {
 	}
 	
 	@PostMapping("criarPagamento")
-	public RedirectView pagar(@RequestParam(value = "valorTotal", required = false) BigDecimal ValorTotal, @RequestParam(name = "id_cliente", required = false) Long id_Cliente,  Pagamento pago)  {
+	public RedirectView pagar(HttpServletRequest request, @RequestParam(value = "valorTotal", required = false) BigDecimal ValorTotal, @RequestParam(name = "id_cliente", required = false) Long id_Cliente,  Pagamento pago)  {
 		
 		System.out.println("ENTROU NO PAGAMENTO");
 
 		Cliente obterCliente = cliente.findByIdCliente(id_Cliente);
 
+
+		String tempo = CookieService.getCookie(request, "tempoTotal");
+		String cliques = CookieService.getCookie(request, "cliques");
+
+		carrinhoAcao.inserirLog(tempo, cliques, obterCliente.getIdCliente(), obterCliente.getIdCliente());
 
 		List<Carrinho> meuCarrinho = carrinhoAcao.obterCarrinho(obterCliente);
 
