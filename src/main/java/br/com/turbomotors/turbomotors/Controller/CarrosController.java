@@ -96,7 +96,6 @@ public class CarrosController {
                  * Obs: Modified on 09/03 to automatically get the file path using java.io
                  * instead of java.nio, and adapting the upload method.
                  */
-                System.out.println(gerarNovoNome);
                 byte[] binarioCarro = file.getBytes();
                 Path minhaPasta = Paths.get(".");
                 String pasta = minhaPasta.toAbsolutePath() + "src\\main\\webapp\\img\\";
@@ -133,7 +132,6 @@ public class CarrosController {
             return ResponseEntity.ok("{\"retorno\": \"Deletado com Sucesso\"}");
         } catch (EmptyResultDataAccessException e) {
             String jsonString = "{\"retorno\":  \"Não existe esse ID, verifique e tente novamente\"}";
-            System.out.println(jsonString);
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(jsonString);
         }
     }
@@ -146,7 +144,6 @@ public class CarrosController {
     @PostMapping("/cadastrarMarcas")
     public ResponseEntity<?> cadastroMarcas(@RequestBody Marca nomeTeste) {
         String nomeDaMarca = nomeTeste.getMarNome();
-        System.out.println(nomeTeste);
         Marca marcas = new Marca();
         marcas.setMarNome(nomeDaMarca);
 
@@ -186,7 +183,6 @@ public class CarrosController {
     public ResponseEntity<List<Veiculo>> obterCarrosAPI() {
 
         List<Veiculo> carros = service.findAll();
-        System.out.print(carros);
         return ResponseEntity.ok(carros);
     }
 
@@ -201,7 +197,6 @@ public class CarrosController {
         minhaView.addObject("tiposCarros", tipos);
         minhaView.setViewName("/web/carros/editar");
         minhaView.addObject("carroEdit", veiculoID);
-        System.out.println(veiculoID);
         return minhaView;
     }
 
@@ -219,7 +214,7 @@ public class CarrosController {
         String baseUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
                 + request.getContextPath();
 
-        Veiculo infoCarros = service.findByIdOrdernado(idTipo);
+        Veiculo infoCarros = service.findByIdOrdernado(carros.getIdCarro());
 
         UUID gerarGuid = UUID.randomUUID();
         String gerarNovoNome = gerarGuid.toString() + '_' + file.getOriginalFilename();
@@ -239,13 +234,14 @@ public class CarrosController {
             if (existeImagem) {
                 carros.setCar_nome_arquivo(infoCarros.getCar_nome_arquivo());
                 carros.setCarImagem(infoCarros.getCarImagem());
-                carros.setCarUrl(infoCarros.getCarUrl());
+                urlContexto = infoCarros.getCarUrl();
+                carros.setCarUrl(urlContexto);
+
             } else {
                 urlContexto = baseUrl + "/img/" + gerarNovoNome;
             }
         } 
 
-        System.out.println("URL Contexto: " + urlContexto);
 
         String nome = file.getOriginalFilename().toLowerCase();
 
@@ -253,26 +249,35 @@ public class CarrosController {
             redirecionarAtributos.addFlashAttribute("meuErro", null);
         }
 
-        ModelAndView minhaView = new ModelAndView("web/carro");
-        Tipo meuTipo = serviceipo.findByVeiculosIdtipo(idTipo);
-        carros.setTipo(meuTipo);
+        Tipo meuTipo = null;
+        Marca minhaMarca = null;
 
-        Marca minhaMarca = serviceMarca.findByVeiculosPorId(idMarca);
+        if(idTipo == null) {
+            meuTipo = infoCarros.getTipo();
+        } else {
+            meuTipo = serviceipo.findByVeiculosIdtipo(idTipo);
+        }
+
+        if(idMarca == null) {
+            minhaMarca = infoCarros.getMarca();
+        } else {
+            minhaMarca = serviceMarca.findByVeiculosPorId(idMarca);
+        } 
+        ModelAndView minhaView = new ModelAndView("web/carro");
+        carros.setTipo(meuTipo);
         carros.setMarca(minhaMarca);
         boolean statusArquivo = file.isEmpty();
 
         if (!statusArquivo) {
             try {
 
-                System.out.println(gerarNovoNome);
                 byte[] binarioCarro = file.getBytes();
                 Path minhaPasta = Paths.get(".");
                 String pasta = minhaPasta.toAbsolutePath() + "src\\main\\webapp\\img\\";
                 String pastaFinal = pasta.replace(".", "").concat(gerarNovoNome);
                 Files.write(Paths.get(pastaFinal), binarioCarro);
 
-                System.out.println("Entrou no Status Arquivo");
-                System.out.println("URL Contexto no banco :> " + urlContexto);
+
                 carros.setCarUrl(urlContexto);
                 carros.setCarImagem(binarioCarro);
                 carros.setCar_nome_arquivo(gerarNovoNome);

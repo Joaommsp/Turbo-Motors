@@ -164,18 +164,18 @@
                       </div>
                       <div class="form-group">
                         <label for="car_nome">Nome</label>
-                        <input type="text" class="form-control" id="car_nome" th:field="*{carroEdit.carNome}"
+                        <input type="text" class="form-control" maxlength="20" id="car_nome" th:field="*{carroEdit.carNome}"
                           name="carNome" required>
                       </div>
 
                       <div class="form-group">
                         <label for="car_nome">Placa</label>
-                        <input type="text" class="form-control" id="car_nome" th:field="*{carroEdit.carPlaca}"
+                        <input type="text" class="form-control" maxlength="10" id="car_nome" th:field="*{carroEdit.carPlaca}"
                           name="carPlaca" required>
                       </div>
                       <div class="form-group">
                         <label for="car_ano">Ano</label>
-                        <input type="text" class="form-control" id="car_ano" th:field="*{carroEdit.carAno}"
+                        <input type="text" class="form-control" id="car_ano" maxlength="5" th:value="${carroEdit.carAno}"
                           name="carAno" required>
                       </div>
 
@@ -198,7 +198,7 @@
                         <label for="tipoId">Tipo do Veículos (Ex: SUV, Sedan..)</label>
                          <div class="selectBancos-button">
                         <select class="form-select selectBanco" id="tiposId" name="idTipo">
-                          <option value="" disabled="disabled" th:text="*{carroEdit.tipo.tipoNome}" selected="selected">
+                          <option disabled="disabled" th:text="*{carroEdit.tipo.tipoNome}" th:value="${carroEdit.tipo.idTipo}" selected="selected">
                             Escolha o Tipo Desejado.</option>
                           <option th:each="tipos : ${tiposCarros}" th:value="${tipos.idTipo}"
                             th:text="${tipos.tipoNome}">Tipo</option>
