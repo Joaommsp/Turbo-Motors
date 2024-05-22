@@ -245,9 +245,10 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.min.css
     const dataHoraFormatada = `${data.toLocaleDateString()} ${data.toLocaleTimeString()}`;
     const qtdCliques = localStorage.getItem('countClicks');
     const qtdTempo = localStorage.getItem('flowTime');
+		// transforma de json para objeto e obtem o item do localStorage
     let acoesArray = JSON.parse(localStorage.getItem('acoes'));
 
-    // salvar ja existentes
+    // salvar ja existentes, aqui ele verifica se tem objeto salvo, se n tiver cria um do 0
     if(acoesArray == null) {
         acoesArray = []
      }
@@ -256,9 +257,17 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.min.css
         data: dataHoraFormatada,
         qtdCliques: qtdCliques,
         qtdTempo: qtdTempo,
-        acao: 'Realizou Pagamento - Teste Final'
+        acao: 'Realizou Pagamento - Teste Final' 
     }
+
+		/***
+		 *  Sim, eu coloquei a estrutura de todos aqui cTRL C e ctrl v so que tava 1 da manha e nem olhei o que falta
+		 *  Quando clica para fazer pagamento ele envia um submit para a api <form>
+		 *  porém, eu joguei nesse  document.getElementById('multi-step-form').submit();,
+		 *  tem que ver se o pagamento ta vindo para essa função aqui e não o submit automatico
+		 * **/
 	
+		 // Aqui ele pega o objeto ja existe do local storage e insere
       localStorage.setItem('acoes', JSON.stringify(acoesArray))
 	  console.log('exinbodin o')
 			showResults();

@@ -1,17 +1,16 @@
 package br.com.turbomotors.turbomotors.Tabelas;
 
-import java.time.LocalDateTime;
 
 public class Acao {
     private String guid;
     private String data;
-    private LocalDateTime dataHoraFormatada;
+    private String dataHoraFormatada;
     private int qtdCliques;
     private int qtdTempo;
     private String acao;
 
     // Construtor da classe Acao
-    public Acao(String guid, String data, LocalDateTime dataHoraFormatada, int qtdCliques, int qtdTempo, String acao) {
+    public Acao(String guid, String data, String dataHoraFormatada, int qtdCliques, int qtdTempo, String acao) {
         this.guid = guid;
         this.data = data;
         this.dataHoraFormatada = dataHoraFormatada;
@@ -36,11 +35,11 @@ public class Acao {
         this.data = data;
     }
 
-    public LocalDateTime getDataHoraFormatada() {
+    public String getDataHoraFormatada() {
         return dataHoraFormatada;
     }
 
-    public void setDataHoraFormatada(LocalDateTime dataHoraFormatada) {
+    public void setDataHoraFormatada(String dataHoraFormatada) {
         this.dataHoraFormatada = dataHoraFormatada;
     }
 
