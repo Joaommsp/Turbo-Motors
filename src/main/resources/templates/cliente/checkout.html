@@ -214,11 +214,14 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.min.css
 								<p>Ao clicar em "Confirmar Pagamento", você autoriza a transação. Certifique-se de que
 									todas as informações estão corretas.</p>
 							</div>
-						</div>
+						</form>
 						<button type="button" class="meuBotaoVoltar  prev-step">Voltar</button>
 						<button onclick="criarPagamento()" class="meuBotao" id="buyBtn">Confirmar Pagamento</button>
+						</div>
+
 					</div>
-				</form>
+
+
 			</div>
 			<div th:unless="${carrinhoVazio}" class="meusCarros">
 				<div th:each="carros : ${carros}">
@@ -234,10 +237,30 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.min.css
 	</section>
 
 	<script>
-		
-		
+	
 		document.getElementById("buyBtn").addEventListener("click", function() {
-    		
+			console.log('Entrou no submit')
+			const guid = localStorage.getItem('guid');
+    const data = new Date();
+    const dataHoraFormatada = `${data.toLocaleDateString()} ${data.toLocaleTimeString()}`;
+    const qtdCliques = localStorage.getItem('countClicks');
+    const qtdTempo = localStorage.getItem('flowTime');
+    let acoesArray = JSON.parse(localStorage.getItem('acoes'));
+
+    // salvar ja existentes
+    if(acoesArray == null) {
+        acoesArray = []
+     }
+	 const acao = {
+        guid: guid,
+        data: dataHoraFormatada,
+        qtdCliques: qtdCliques,
+        qtdTempo: qtdTempo,
+        acao: 'Realizou Pagamento - Teste Final'
+    }
+	
+      localStorage.setItem('acoes', JSON.stringify(acoesArray))
+	  console.log('exinbodin o')
 			showResults();
 			document.getElementById('multi-step-form').submit();
 			

@@ -1,19 +1,23 @@
 package br.com.turbomotors.turbomotors.Controller;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
+import java.net.URLDecoder;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
-
+import java.net.URLDecoder;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -37,6 +41,10 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import br.com.turbomotors.turbomotors.Repositorio.AluguelRepository;
 import br.com.turbomotors.turbomotors.Repositorio.CarrinhoRepository;
 import br.com.turbomotors.turbomotors.Repositorio.CarroCrud;
@@ -45,6 +53,7 @@ import br.com.turbomotors.turbomotors.Repositorio.CompraRepositorio;
 import br.com.turbomotors.turbomotors.Repositorio.EnderecoRepositorio;
 import br.com.turbomotors.turbomotors.Repositorio.PagamentoRepositorio;
 import br.com.turbomotors.turbomotors.Servico.CookieService;
+import br.com.turbomotors.turbomotors.Tabelas.Acao;
 import br.com.turbomotors.turbomotors.Tabelas.Aluguel;
 import br.com.turbomotors.turbomotors.Tabelas.Carrinho;
 import br.com.turbomotors.turbomotors.Tabelas.Cliente;
@@ -357,17 +366,30 @@ public class FrontEndController {
 	}
 	
 	@PostMapping("criarPagamento")
-	public RedirectView pagar(HttpServletRequest request, @RequestParam(value = "valorTotal", required = false) BigDecimal ValorTotal, @RequestParam(name = "id_cliente", required = false) Long id_Cliente,  Pagamento pago)  {
+	public RedirectView pagar(HttpServletRequest request, @RequestParam(value = "valorTotal", required = false) BigDecimal ValorTotal, @RequestParam(name = "id_cliente", required = false) Long id_Cliente,  Pagamento pago) throws UnsupportedEncodingException  {
 		
 		System.out.println("ENTROU NO PAGAMENTO");
 
 		Cliente obterCliente = cliente.findByIdCliente(id_Cliente);
 
+		String encodedJsonString  = CookieService.getCookieTesteRene(request, "jsonAcao");
+		String decodedJsonString = URLDecoder.decode(encodedJsonString, "UTF-8");
 
-		String tempo = CookieService.getCookie(request, "tempoTotal");
-		String cliques = CookieService.getCookie(request, "cliques");
+		 Gson gson = new Gson();
 
-		carrinhoAcao.inserirLog(tempo, cliques, obterCliente.getIdCliente(), obterCliente.getIdCliente());
+		 //https://stackoverflow.com/questions/4318458/how-to-deserialize-a-list-using-gson-or-another-json-library-in-java 
+		 // como transformar em listas
+		 List<Acao> acoes = (List<Acao>) gson.fromJson(decodedJsonString, new TypeToken<List<Acao>>(){}.getType());
+
+
+
+
+		for(Acao item : acoes) {
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+			LocalDateTime dataHora = LocalDateTime.parse(item.getData(), formatter);
+			carrinhoAcao.inserirLog(item.getGuid(), dataHora, item.getAcao() ,item.getQtdTempo(), item.getQtdCliques(), obterCliente.getIdCliente(), obterCliente.getIdCliente());
+		}
+
 
 		List<Carrinho> meuCarrinho = carrinhoAcao.obterCarrinho(obterCliente);
 

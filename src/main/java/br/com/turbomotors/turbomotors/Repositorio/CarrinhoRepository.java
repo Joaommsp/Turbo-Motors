@@ -1,5 +1,6 @@
 package br.com.turbomotors.turbomotors.Repositorio;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -31,8 +32,8 @@ public interface CarrinhoRepository extends JpaRepository<Carrinho, Long> {
 
 
     @Modifying
-    @Query(value = "insert into log_compra (lg_tempo ,lg_cliques, id_compra, id_usuario) values (:lg_tempo, :lg_cliques, :id_compra, :id_usuario);", nativeQuery = true)
-    void inserirLog(@Param("lg_tempo") String tempoTotal, @Param("lg_cliques") String cliques, @Param("id_compra") Long id_Compra, @Param("id_usuario") Long id_usuario );
+    @Query(value = "insert into log_compra (guid,dataHoraFormatada,acao, lg_tempo ,lg_cliques, id_compra, id_usuario) values (:guid, :dataHoraFormatada,  :acao, :lg_tempo, :lg_cliques, :id_compra, :id_usuario);", nativeQuery = true)
+    void inserirLog(@Param("guid") String guid, @Param("dataHoraFormatada") LocalDateTime dataHoraFormatada, @Param("acao") String acao, @Param("lg_tempo") int lg_tempo, @Param("lg_cliques") int cliques, @Param("id_compra") Long id_Compra, @Param("id_usuario") Long id_usuario );
 
 
     @Query(value = "select id_veiculo from carrinho where id_usuario = :usuario and id_veiculo = :idCarro limit 1", nativeQuery = true)
