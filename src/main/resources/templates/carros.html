@@ -199,6 +199,29 @@
     }
 
   document.getElementById("comprarBtn").addEventListener("click", function() {
+
+    const guid = localStorage.getItem('guid');
+    const data = new Date();
+    const dataHoraFormatada = `${data.toLocaleDateString()} ${data.toLocaleTimeString()}`;
+    const qtdCliques = localStorage.getItem('countClicks');
+    const qtdTempo = localStorage.getItem('flowTime');
+    let acoesArray = JSON.parse(localStorage.getItem('acoes'));
+
+    // salvar ja existentes
+    if(acoesArray == null) {
+        acoesArray = []
+     }
+
+     const acao = {
+        guid: guid,
+        data: dataHoraFormatada,
+        qtdCliques: qtdCliques,
+        qtdTempo: qtdTempo,
+        acao: 'Clicou para Comprar'
+    }
+
+    acoesArray.push(acao);
+    localStorage.setItem('acoes', JSON.stringify(acoesArray))
     document.getElementById("carForm").submit();
   });
 
@@ -221,6 +244,31 @@
       mensagemToast("warning","A data de fim deve ser maior que a data de início.");
       return;
     }
+
+
+
+    const guid = localStorage.getItem('guid');
+    const data = new Date();
+    const dataHoraFormatada = `${data.toLocaleDateString()} ${data.toLocaleTimeString()}`;
+    const qtdCliques = localStorage.getItem('countClicks');
+    const qtdTempo = localStorage.getItem('flowTime');
+    let acoesArray = JSON.parse(localStorage.getItem('acoes'));
+
+    // salvar ja existentes
+    if(acoesArray == null) {
+        acoesArray = []
+     }
+
+     const acao = {
+        guid: guid,
+        data, dataHoraFormatada,
+        qtdCliques: qtdCliques,
+        qtdTempo: qtdTempo,
+        acao: 'Clicou para Alugar'
+    }
+
+    acoesArray.push(acao);
+    localStorage.setItem('acoes', JSON.stringify(acoesArray))
     document.getElementById("carForm").submit();
   });
 

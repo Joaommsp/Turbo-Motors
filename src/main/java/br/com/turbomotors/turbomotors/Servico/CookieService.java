@@ -27,5 +27,17 @@ public class CookieService {
 				.orElse(null);
 		
 	}
+
+	public static String getCookieTesteRene(HttpServletRequest request, String key) {
+		Cookie[] cookies = request.getCookies();
+		if (cookies != null) {
+			for (Cookie cookie : cookies) {
+				if (key.equals(cookie.getName())) {
+					return cookie.getValue();
+				}
+			}
+		}
+		return null;
+	}
 	
 }
