@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -476,3 +477,483 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.6/dist/sweetalert2.min.css
     </div>
   </body>
 </html>
+=======
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    />
+
+    <script src="
+https://cdn.jsdelivr.net/npm/sweetalert2@11.10.6/dist/sweetalert2.all.min.js
+"></script>
+    <link
+      href="
+https://cdn.jsdelivr.net/npm/sweetalert2@11.10.6/dist/sweetalert2.min.css
+"
+      rel="stylesheet"
+    />
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+
+    <script src="/TurboStyle/front-turbo/help-page/script.js" defer></script>
+    <link
+      rel="stylesheet"
+      href="/TurboStyle/front-turbo/help-page/styles.css"
+    />
+    <title>Turbo Motors - Login</title>
+  </head>
+
+  <body>
+    <div class="mainContainer">
+      <header class="navigation">
+        <img
+          src="/TurboStyle/img/Logo-dark.png"
+          alt="Turbo Motors Logo"
+          class="logo"
+        />
+        <div class="headerlinks">
+          <a aria-current="page" href="/inicio" class="activeLink">Home</a>
+          <a href="#" class="disableLink">Comprar</a>
+          <a href="#" class="disableLink">Alugar</a>
+
+          <div th:unless="${autenticado}">
+            <a href="/inicio/userClient" class="activeLink">Login</a>
+          </div>
+        </div>
+        <div th:if="${autenticado}" class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="navbarDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span th:text="${autenticado.pesNome}"></span>
+            <img
+              th:src="${autenticado.url_anexo}"
+              alt="Imagem do Usuário"
+              class="rounded-circle"
+              style="width: 30px; height: 30px; object-fit: cover"
+            />
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="/cliente/compras">Perfil</a></li>
+            <li>
+              <a class="dropdown-item" href="/cliente/compras"
+                >Minhas Compras</a
+              >
+            </li>
+            <li>
+              <hr class="dropdown-divider" />
+            </li>
+            <li><a class="dropdown-item" href="/cliente/sair">Sair</a></li>
+          </ul>
+        </div>
+      </header>
+      <div class="mainContainer">
+        <h1>Dúvidas frequentes</h1>
+        <p class="subTitle">
+          Respondemos as dúvidas mais comuns em nossa plataforma, você também
+          pode entrar em contato conosco, teremos os prazer em tirar suas
+          dúvidas <img src="/TurboStyle/img/svg/emojis/smile.svg" alt="" />
+        </p>
+        <div class="commonQuestions">
+          <div class="cardQuestion">
+            <span class="question"
+              >Bem vindo a Turbo Motors: Tarefas de Usuário</span
+            >
+            <span class="question" style="display: block; margin-bottom: 2rem"
+              >Siga as tarefas abaixo:</span
+            >
+            <div class="taskAnswer">
+              <h1>1- Tarefa: Cadastro de Usuário no Site</h1>
+              <p>
+                <strong>Objetivo:</strong> Realizar o cadastro de um novo
+                usuário no site, preenchendo todas as informações solicitadas.
+              </p>
+              <h2>Subtarefas:</h2>
+              <ul>
+                <li>
+                  Acesssa a página inical do site pela URL :
+                  <a href="http://localhost:5500/inicio" target="_blank"
+                    >http://localhost:5500/inicio</a
+                  >
+                </li>
+                <li>Acessar a página de cadastro na aba de (Login);</li>
+                <li>Preencher o formulário de cadastro;</li>
+                <li>
+                  Insira seus dados pessoais, como nome completo, endereço de
+                  e-mail e senha;
+                </li>
+                <li>
+                  Certificar-se de que todas as informações estejam corretas e
+                  completas;
+                </li>
+                <li>Criar cadastro;</li>
+                <li>Confirmar a criação do cadastro na aba de (Meu perfil).</li>
+              </ul>
+              <h1>2 - Tarefa: Compra de um Veículo</h1>
+              <p>
+                <strong>Objetivo:</strong> Realizar a compra de um veículo
+                online, desde a busca até a finalização da compra.
+              </p>
+              <h2>Subtarefas:</h2>
+              <ul>
+                <li>
+                  Acesssa a página inical do site pela URL :
+                  <a href="http://localhost:5500/inicio" target="_blank"
+                    >http://localhost:5500/inicio</a
+                  >
+                </li>
+                <li>Navegar pelas opções de veículos;</li>
+                <li>
+                  Explorar as diferentes categorias de veículos disponíveis;
+                </li>
+                <li>
+                  Clicar em um veículo da lista de resultados para visualizar
+                  suas informações;
+                </li>
+                <li>Visualizar detalhes de um veículo;</li>
+                <li>Ir para o checkout para a compra do veículo;</li>
+                <li>Preencher formulário de pagamento;</li>
+                <li>Finalizar Compra do veículo.</li>
+              </ul>
+              <h1>3- Tarefa: Locação de um Veículo</h1>
+              <p>
+                <strong
+                  >Centro Universitário do Rio São Francisco (UNIRIOS) -
+                  Sistemas de Informação 2024.1</strong
+                >
+              </p>
+              <p>
+                <strong>Objetivo:</strong> Realizar a locação de um veículo
+                online, desde a busca até a finalização da compra.
+              </p>
+              <h2>Subtarefas:</h2>
+              <ul>
+                <li>
+                  Acesssa a página inical do site pela URL :
+                  <a href="http://localhost:5500/inicio" target="_blank"
+                    >http://localhost:5500/inicio</a
+                  >
+                </li>
+
+                <li>Navegar pelas opções de veículos;</li>
+                <li>
+                  Explorar as diferentes categorias de veículos disponíveis;
+                </li>
+                <li>
+                  Clicar em um veículo da lista de resultados para visualizar
+                  suas informações;
+                </li>
+                <li>Visualizar detalhes de um veículo;</li>
+                <li>Selecionar data inicial e final de locação;</li>
+                <li>Ir para o checkout para a locação do veículo;</li>
+                <li>Preencher formulário de pagamento;</li>
+                <li>Finalizar locação do veículo.</li>
+              </ul>
+              <h1>
+                4 - Tarefa: Buscar tirar uma dúvida sobre criar uma conta no
+                site
+              </h1>
+              <p>
+                <strong>Objetivo:</strong> Buscar por suporte na criação de uma
+                conta no site (cadastro).
+              </p>
+              <h2>Subtarefas:</h2>
+              <ul>
+                <li>
+                  Acesssa a página inical do site pela URL :
+                  <a href="http://localhost:5500/inicio" target="_blank"
+                    >http://localhost:5500/inicio</a
+                  >
+                </li>
+
+                <li>Clicar no menu flutuante “Precisa de ajuda?”;</li>
+                <li>Buscar o card de ajuda sobre como criar um cadastro;</li>
+                <li>Seguir o Passo a Passo proposto;</li>
+                <li>Criar cadastro.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="cardQuestion">
+            <span class="question"
+              >Bem vindo a Turbo Motors: Tarefas de Administrador</span
+            >
+            <span class="question" style="display: block; margin-bottom: 2rem"
+              >Siga as tarefas abaixo:</span
+            >
+            <div class="taskAnswer">
+              <h1>1 - Verificar o desempenho financeiro da loja</h1>
+              <p>
+                <strong>Objetivo:</strong> Analisar desempenho financeiro geral
+                da Loja.
+              </p>
+              <h2>Subtarefas:</h2>
+              <ul>
+                <li>
+                  Acessar a página o sistema de gerenciamento pela URL:
+                  <a href="http://localhost:5500/admin" target="_blank"
+                    >http://localhost:5500/admin</a
+                  >
+                </li>
+                <li>Coloque usuário: “admin” e senha: “1103”</li>
+                <li>
+                  Verificar o financeiro da loja conferindo nos cards de “Venda
+                  de carros”, “Vendas canceladas”, “Renda Mensal” e “Total de
+                  Retorno Mensal”;
+                </li>
+                <li>
+                  Comparar desempenho mensal atual com o desempenho mensal
+                  anterior;
+                </li>
+                <li>
+                  Comparar as informações dos gráficos com as informações dos
+                  cards;
+                </li>
+                <li>
+                  Acessar o relatório de vendas em “Abrir relatório de vendas”;
+                </li>
+              </ul>
+
+              <h1>
+                2 - Monitorar compras e aluguéis através das listagens
+                disponíveis
+              </h1>
+              <p>
+                <strong>Objetivo:</strong> Verificar veículos comprados e
+                veículos alugados.
+              </p>
+              <h2>Subtarefas:</h2>
+              <ul>
+                <li>
+                  Acessar a página o sistema de gerenciamento pela URL:
+                  <a href="http://localhost:5500/admin" target="_blank"
+                    >http://localhost:5500/admin</a
+                  >
+                </li>
+                <li>
+                  Acessar o relatório de vendas em “Abrir Listagem de Vendas” no
+                  card de “Renda Mensal”;
+                </li>
+                <li>Verificar veículos vendidos e veículos alugados;</li>
+              </ul>
+
+              <h1>
+                3 - Realizar gerenciamento e adição de um veículo para a loja
+                virtual
+              </h1>
+              <p>
+                <strong>Objetivo:</strong> Adicionar um novo veículo no banco,
+                independente do modelo.
+              </p>
+              <h2>Subtarefas:</h2>
+              <ul>
+                <li>
+                  Acessar a página o sistema de gerenciamento pela URL:
+                  <a href="http://localhost:5500/admin" target="_blank"
+                    >http://localhost:5500/admin</a
+                  >
+                </li>
+                <li>
+                  No menu lateral esquerdo, acessar o cadastro de veículo em
+                  “Cadastros”;
+                </li>
+                <li>Acessar “Cadastrar carros”;</li>
+                <li>
+                  Seguir o guia interativo para fazer o cadastro do carro e
+                  listagem dos veículos existentes;
+                </li>
+                <li>Realizar o cadastro de um veículo;</li>
+                <li>
+                  Centro Universitário do Rio São Francisco (UNIRIOS) - Sistemas
+                  de Informação 2024.1;
+                </li>
+                <li>Listar veículos cadastrados;</li>
+              </ul>
+
+              <h1>
+                4 - Realizar gerenciamento e edição de um veículo existente
+              </h1>
+              <p>
+                <strong>Objetivo:</strong> Editar informações de um dos veículos
+                existentes.
+              </p>
+              <h2>Subtarefas:</h2>
+              <ul>
+                <li>
+                  Acessar a página o sistema de gerenciamento pela URL:
+                  <a href="http://localhost:5500/admin" target="_blank"
+                    >http://localhost:5500/admin</a
+                  >
+                </li>
+                <li>
+                  No menu lateral esquerdo, acessar o cadastro de veículo em
+                  “Cadastros”;
+                </li>
+                <li>Acessar “Cadastrar carros”;</li>
+                <li>
+                  Seguir o guia interativo para fazer o cadastro do carro e
+                  listagem dos veículos existentes;
+                </li>
+                <li>Listar veículos cadastrados;</li>
+                <li>Realizar a edição de um veículo cadastrado;</li>
+                <li>Salvar alterações;</li>
+              </ul>
+            </div>
+          </div>
+          <div class="cardQuestion">
+            <span class="question"
+              >Como criar minha conta na Turbo Motors ?</span
+            >
+            <div class="answerContainer cardClosed">
+              <img
+                src="/TurboStyle/img/duvida01.png"
+                alt=""
+                class="questionImage"
+              />
+              <p class="questionAnswer">
+                Acesse o menu no topo da página , clique em
+                <strong>"Login"</strong>, em seguida no final do formulário ,
+                escolha a opção <strong>"Crie sua conta"</strong>
+                preeencha o formulário com suas informações
+              </p>
+              <img
+                src="/TurboStyle/img/svg/arrow-open.svg"
+                alt=""
+                class="questionControl"
+              />
+            </div>
+          </div>
+          <div class="cardQuestion">
+            <span class="question"
+              >Quais informações são necessárias para criar uma conta ?</span
+            >
+            <div class="answerContainer cardClosed">
+              <img
+                src="/TurboStyle/img/logo.png"
+                alt=""
+                class="questionImage"
+              />
+              <p class="questionAnswer">
+                Para criar uma conta em nossa plataforma Turbo Mortors, você vai
+                precisar informar seu nome completo seu email , seu CPF ou CNPJ
+                , seu telefone para contato e seu endereço completo para
+                entregar. Você pode editar suas informações em configurações da
+                conta.
+              </p>
+              <img
+                src="/TurboStyle/img/svg/arrow-open.svg"
+                alt=""
+                class="questionControl"
+              />
+            </div>
+          </div>
+          <div class="cardQuestion">
+            <span class="question"
+              >Os veículos podem apresentar defeitos ?</span
+            >
+            <div class="answerContainer cardClosed">
+              <img
+                src="/TurboStyle/img/logo.png"
+                alt=""
+                class="questionImage"
+              />
+              <p class="questionAnswer">
+                Todos os nossos veículos são revisados, testados e relizadas as
+                manutenções necessárias antes de serem entregues. Em caso de
+                qualquer defeito você pode entrar em contato conosco que vamos
+                ter o prazer em te ajudar.
+              </p>
+              <img
+                src="/TurboStyle/img/svg/arrow-open.svg"
+                alt=""
+                class="questionControl"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="formContainer">
+          <h2>Fale conosco</h2>
+          <p>
+            Descreva sua dúvida ou problema , vamos retornar o mais rápido
+            possível , estamos sempre em busca melhorar a experiência de nossos
+            clientes.
+          </p>
+          <form
+            target="_blank"
+            action="https://formsubmit.co/jmmsp2003@hotmail.com"
+            method="POST"
+            class="helpForm"
+          >
+            <div class="form-group">
+              <div class="form-row">
+                <div class="col">
+                  <input
+                    type="text"
+                    name="name"
+                    class="form-control"
+                    placeholder="Seu nome"
+                    required
+                  />
+                </div>
+                <div class="col">
+                  <input
+                    type="email"
+                    name="email"
+                    class="form-control"
+                    placeholder="Seu e-mail"
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <textarea
+                placeholder="Sua mensagem"
+                class="form-control"
+                name="message"
+                rows="10"
+                required
+              ></textarea>
+            </div>
+            <input type="hidden" name="_captcha" value="false" />
+            <input
+              type="hidden"
+              name="_next"
+              value="http://localhost:5500/inicio/obrigado"
+            />
+            <button type="submit" class="btn btn-lg btn-dark btn-block">
+              Enviar
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <footer class="footer">
+        <div class="footerContent">
+          <span>Turbo Motors™️ 2024</span>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
+>>>>>>> 13446b4a112a4ce3ba3d1a332957fe0842d0877a

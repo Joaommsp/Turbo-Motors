@@ -1,6 +1,5 @@
 package br.com.turbomotors.turbomotors.Tabelas;
 
-import java.time.LocalDateTime;
 
 public class Acao {
     private String guid;
