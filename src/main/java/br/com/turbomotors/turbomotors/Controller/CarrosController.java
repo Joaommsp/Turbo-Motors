@@ -222,6 +222,8 @@ public class CarrosController {
         String urlContexto = "";
 
         Boolean existeImagem;
+
+    if(file.isEmpty()) { 
         try {
             byte[] imageData = infoCarros.getCarImagem();
             existeImagem = imageData != null;
@@ -229,6 +231,9 @@ public class CarrosController {
             // Tratar a exceção (ex: log de erro, imagem padrão)
             existeImagem = false;
         }
+    } else {
+        existeImagem = false;
+    }
 
         if (carros.getCar_nome_arquivo() == null) {
             if (existeImagem) {

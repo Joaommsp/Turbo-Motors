@@ -26,14 +26,14 @@ public interface CarrinhoRepository extends JpaRepository<Carrinho, Long> {
     "INNER JOIN veiculo v ON c.id_veiculo = v.id_carro " +
     "WHERE c.id_usuario = :id_cliente", nativeQuery = true)
     List<Object[]> carrinhoCliente(@Param("id_cliente") Long id_cliente);
-
+ 
     @Query("SELECT c FROM Carrinho c WHERE c.cliente = ?1")
     List<Carrinho> obterCarrinho(Cliente cliente);
 
 
     @Modifying
     @Query(value = "insert into log_compra (guid,dataHoraFormatada,acao, lg_tempo ,lg_cliques, id_compra, id_usuario) values (:guid, :dataHoraFormatada,  :acao, :lg_tempo, :lg_cliques, :id_compra, :id_usuario);", nativeQuery = true)
-    void inserirLog(@Param("guid") String guid, @Param("dataHoraFormatada") LocalDateTime dataHoraFormatada, @Param("acao") String acao, @Param("lg_tempo") int lg_tempo, @Param("lg_cliques") int cliques, @Param("id_compra") Long id_Compra, @Param("id_usuario") Long id_usuario );
+    void inserirLog(@Param("guid") String guid, @Param("dataHoraFormatada") String dataHoraFormatada, @Param("acao") String acao, @Param("lg_tempo") int lg_tempo, @Param("lg_cliques") int cliques, @Param("id_compra") Long id_Compra, @Param("id_usuario") Long id_usuario );
 
 
     @Query(value = "select id_veiculo from carrinho where id_usuario = :usuario and id_veiculo = :idCarro limit 1", nativeQuery = true)

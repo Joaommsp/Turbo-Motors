@@ -9,7 +9,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
 		crossorigin="anonymous"></script>
-		<script src="/TurboStyle/front-turbo/bibliotecas-cars/testResults.js" defer></script>
+	<script src="/TurboStyle/front-turbo/bibliotecas-cars/testResults.js" defer></script>
 
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 
@@ -186,7 +186,8 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.min.css
 										<label for="NAME" class="small text-muted mb-1">EXPIRAÇÃO DO CARTÃO
 										</label>
 										<input type="text" class="form-control form-control-sm" name="cardExpiracao"
-											id="cardExpiracao" aria-describedby="helpId" placeholder="06/21" maxlength="5">
+											id="cardExpiracao" aria-describedby="helpId" placeholder="06/21"
+											maxlength="5">
 									</div>
 								</div>
 								<div class="col-sm-6">
@@ -214,57 +215,60 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.min.css
 								<p>Ao clicar em "Confirmar Pagamento", você autoriza a transação. Certifique-se de que
 									todas as informações estão corretas.</p>
 							</div>
-						</form>
-						<button type="button" class="meuBotaoVoltar  prev-step">Voltar</button>
-						<button onclick="criarPagamento()" class="meuBotao" id="buyBtn">Confirmar Pagamento</button>
-						</div>
-
-					</div>
-
-
+				</form>
+				<button type="button" class="meuBotaoVoltar  prev-step">Voltar</button>
+				<button onclick="criarPagamento()" class="meuBotao" id="buyBtn">Confirmar Pagamento</button>
 			</div>
-			<div th:unless="${carrinhoVazio}" class="meusCarros">
-				<div th:each="carros : ${carros}">
-					<div class="col-auto dadoscarros">
-						<p th:unless="false" style="display: block;" id="codigoCarro" th:text="${carros[4]}"></p>
-						<img class="img-fluid" th:src="${carros[2]}" width="80" height="62">
-						<p class="mb-0 texto" th:text="${carros[1]}"></p> <!-- car_nome -->
-						<button class="badge badge-light" th:onclick="'javascript:deletarCarrinho(' +${carros[4]} + ')'"
-							style="background: none; border: none;">X</button>
-					</div>
+
+		</div>
+
+
+		</div>
+		<div th:unless="${carrinhoVazio}" class="meusCarros">
+			<div th:each="carros : ${carros}">
+				<div class="col-auto dadoscarros">
+					<p th:unless="false" style="display: block;" id="codigoCarro" th:text="${carros[4]}"></p>
+					<img class="img-fluid" th:src="${carros[2]}" width="80" height="62">
+					<p class="mb-0 texto" th:text="${carros[1]}"></p> <!-- car_nome -->
+					<button class="badge badge-light" th:onclick="'javascript:deletarCarrinho(' +${carros[4]} + ')'"
+						style="background: none; border: none;">X</button>
 				</div>
 			</div>
+		</div>
 	</section>
 
 	<script>
-	
-		document.getElementById("buyBtn").addEventListener("click", function() {
+
+		document.getElementById("buyBtn").addEventListener("click", function () {
 			console.log('Entrou no submit')
 			const guid = localStorage.getItem('guid');
-    const data = new Date();
-    const dataHoraFormatada = `${data.toLocaleDateString()} ${data.toLocaleTimeString()}`;
-    const qtdCliques = localStorage.getItem('countClicks');
-    const qtdTempo = localStorage.getItem('flowTime');
-    let acoesArray = JSON.parse(localStorage.getItem('acoes'));
+			const data = new Date();
+			const dataHoraFormatada = `${data.toLocaleDateString()} ${data.toLocaleTimeString()}`;
+			const qtdCliques = localStorage.getItem('countClicks');
+			const qtdTempo = localStorage.getItem('flowTime');
+			let acoesArray = JSON.parse(localStorage.getItem('acoes'));
 
-    // salvar ja existentes
-    if(acoesArray == null) {
-        acoesArray = []
-     }
-	 const acao = {
-        guid: guid,
-        data: dataHoraFormatada,
-        qtdCliques: qtdCliques,
-        qtdTempo: qtdTempo,
-        acao: 'Realizou Pagamento - Teste Final'
-    }
-	
-      localStorage.setItem('acoes', JSON.stringify(acoesArray))
-	  console.log('exinbodin o')
+			// salvar ja existentes
+			if (acoesArray == null) {
+				acoesArray = []
+			}
+			const acao = {
+				guid: guid,
+				data: dataHoraFormatada,
+				qtdCliques: qtdCliques,
+				qtdTempo: qtdTempo,
+				acao: 'Realizou Pagamento - Teste Final'
+			}
+
+			acoesArray.push(acao);
+			localStorage.setItem('acoes', JSON.stringify(acoesArray))
 			showResults();
-			document.getElementById('multi-step-form').submit();
-			
-  });
+
+			setTimeout(function () {
+				document.getElementById('multi-step-form').submit();
+			}, 500);
+
+		});
 
 
 	</script>

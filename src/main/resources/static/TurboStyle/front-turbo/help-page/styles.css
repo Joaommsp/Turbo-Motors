@@ -106,9 +106,29 @@ body {
   position: relative;
 }
 
-.question {
+.cardQuestion span {
+  color: #ffffff;
+}
+
+.taskAnswer {
+  color: #ffffff;
+}
+
+.taskAnswer {
   color: #ffffff;
   margin-bottom: 2rem;
+}
+
+.taskAnswer h1 {
+  font-size: 1.5rem;
+}
+
+.taskAnswer h2 {
+  font-size: 1.2rem;
+}
+
+.taskAnswer p {
+  font-size: 0.9rem;
 }
 
 .answerContainer {
