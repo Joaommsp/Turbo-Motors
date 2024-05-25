@@ -372,6 +372,7 @@ public class FrontEndController {
 
 		Cliente obterCliente = cliente.findByIdCliente(id_Cliente);
 
+		try {
 		String encodedJsonString  = CookieService.getCookieTesteRene(request, "jsonAcao");
 		String decodedJsonString = URLDecoder.decode(encodedJsonString, "UTF-8");
 
@@ -385,10 +386,11 @@ public class FrontEndController {
 
 
 		for(Acao item : acoes) {
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-			LocalDateTime dataHora = LocalDateTime.parse(item.getData(), formatter);
-			carrinhoAcao.inserirLog(item.getGuid(), dataHora, item.getAcao() ,item.getQtdTempo(), item.getQtdCliques(), obterCliente.getIdCliente(), obterCliente.getIdCliente());
-		}
+			carrinhoAcao.inserirLog(item.getGuid(), item.getData(), item.getAcao() ,item.getQtdTempo(), item.getQtdCliques(), obterCliente.getIdCliente(), obterCliente.getIdCliente());
+		} 
+	} catch(Exception e) {
+		System.out.println(e.getMessage());
+	}
 
 
 		List<Carrinho> meuCarrinho = carrinhoAcao.obterCarrinho(obterCliente);
